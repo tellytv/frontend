@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>Overview of lines:</h1>
+  <div *ngIf="(lineup$ | async) as lineup">
+    <ul class="list-group">
+      <li *ngFor="let line of lineup" class="list-group-item">
+        <b>{{ line.GuideNumber }}: </b>
+        {{ line.GuideName }} <span *ngIf="line.HD" class="badge badge-primary badge-pill">HD</span>&nbsp;
+        <small class="text-muted">{{ line.URL }}</small>
+      </li>
+    </ul>
+  </div>
+</div>

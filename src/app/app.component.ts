@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { environment } from '@environment';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'telly-fe';
+  title = `Configured telly url ${environment.url}`;
 }
