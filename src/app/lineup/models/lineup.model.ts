@@ -19,5 +19,4 @@ export interface Lineup {
   CreatedAt: Date;
 
   Channels: LineupChannel[];
-  DisabledChannels: LineupChannel[];
 }

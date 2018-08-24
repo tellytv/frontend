@@ -24,9 +24,6 @@ export class LineupService {
         if (!lineup.Channels) {
           lineup.Channels = [];
         }
-        if (!lineup.DisabledChannels) {
-          lineup.DisabledChannels = [];
-        }
         return lineup;
       })
     );

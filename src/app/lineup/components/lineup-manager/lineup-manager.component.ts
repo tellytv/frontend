@@ -4,11 +4,7 @@ import { GuideSourceService } from '@app/lineup/services/guide-source.service';
 import { VideoSourceService } from '@app/lineup/services/video-source.service';
 import { LineupService } from '@app/lineup/services/lineup.service';
 import { Lineup } from '@app/lineup/models/lineup.model';
-import { LineupChannel } from '@app/lineup/models/lineup-channel.model';
-import { GuideSource } from '@app/lineup/models/guide-source.model';
-import { GuideSourceChannel } from '@app/lineup/models/guide-source-channel.model';
-import { VideoSource } from '@app/lineup/models/video-source.model';
-import { VideoSourceTrack } from '@app/lineup/models/video-source-track.model';
+import { LineupChannel, GuideSourceChannel, VideoSourceTrack } from '@app/lineup/models';
 import { Observable } from 'rxjs/internal/Observable';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
@@ -50,7 +46,6 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
 
     this.subs.add(this.dragulaService.drop(this.DRAGULA_NAME).subscribe(() => {
       this.updateChannelNumbers(this.lineup.Channels);
-      this.updateChannelNumbers(this.lineup.DisabledChannels);
     }));
   }
 
@@ -58,9 +53,17 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
-  addChannelToLineup(): void {
-    // TODO: Add channel
-    this.newLineupChannel = null;
+  addChannel(): void {
+    const channelNumber = this.lineup.Channels.length + 1;
+    const newChannel: LineupChannel = {
+      Title: '',
+      ChannelNumber: `${channelNumber}`,
+      HD: false,
+      Favorite: false,
+      CreatedAt: new Date()
+    };
+    this.lineup.Channels.push(newChannel);
+    this.editingChannel = newChannel;
   }
 
   updateChannelNumbers(channels: LineupChannel[]): void {
@@ -68,6 +71,11 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
       const channelNumber = i + 1;
       channels[i].ChannelNumber = `${channelNumber}`;
     }
+  }
+
+  removeChannel(channel: LineupChannel): void {
+    const removeIndex = this.lineup.Channels.indexOf(channel);
+    this.lineup.Channels.splice(removeIndex, 1);
   }
 
 }

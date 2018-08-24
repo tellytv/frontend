@@ -1,7 +1,7 @@
 <div class="container" *ngIf="lineup">
   <div class="row">
-    <div class="col-6">
-      <h4>Enabled Channels</h4>
+    <div class="col">
+      <h4>My Channels <a class="float-right pr-3 pointer" (click)="addChannel()"><i class="fas fa-plus"></i></a></h4>
       <ul class="list-group" [dragula]="DRAGULA_NAME" [(dragulaModel)]='lineup.Channels'>
         <li *ngIf="!lineup.Channels || !(lineup.Channels.length > 0)" class="list-group-item">
           Drag a channel here to enable it.
@@ -11,22 +11,10 @@
           {{ channel.Title }}
           <span *ngIf="channel.HD" class="badge badge-primary badge-pill">HD</span>
           <span *ngIf="channel.Favorite" class="badge badge-primary badge-pill">Favorite</span>
-          <a class="pointer float-right" (click)="editingChannel = channel"><i class="fas fa-edit"></i></a>
-        </li>
-      </ul>
-    </div>
-    <div class="col-6">
-      <h4>Disabled Channels</h4>
-      <ul class="list-group" [dragula]="DRAGULA_NAME" [(dragulaModel)]='lineup.DisabledChannels'>
-        <li *ngIf="!lineup.DisabledChannels || !(lineup.DisabledChannels.length > 0)" class="list-group-item">
-          Drag a channel here to disable it.
-        </li>
-        <li *ngFor="let line of lineup.DisabledChannels" class="list-group-item">
-          <b>{{ line.ChannelNumber }}: </b>
-          {{ line.Title }}
-          <span *ngIf="line.HD" class="badge badge-primary badge-pill">HD</span>
-          <span *ngIf="line.Favorite" class="badge badge-primary badge-pill">Favorite</span>
-          <a class="pointer float-right" (click)="editingChannel = channel"><i class="fas fa-edit"></i></a>
+          <span class="float-right">
+            <a class="pointer pr-2" (click)="editingChannel = channel"><i class="fas fa-edit"></i></a>
+            <a class="pointer" (click)="removeChannel(channel)"><i class="fas fa-trash"></i></a>
+          </span>
         </li>
       </ul>
     </div>
