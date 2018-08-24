@@ -9,7 +9,7 @@ export interface GuideSourceChannel {
   HD: boolean;
   ImportedAt: Date;
   GuideSourceName: string;
-  PrettyDisplayNames: string;
+  PrettyDisplayName: string;
   IconSource?: string;
 }
 

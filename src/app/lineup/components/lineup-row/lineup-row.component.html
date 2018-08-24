@@ -18,16 +18,16 @@
 </td>
 <td>
   <ng-select [items]="guideChannels"
-             bindLabel="PrettyDisplayNames"
+             bindLabel="PrettyDisplayName"
              bindValue="ID"
              groupBy="GuideSourceName"
              [(ngModel)]="channel.GuideChannelID"
              [searchFn]="searchGuideChannels">
     <ng-template ng-label-tmp let-item="item">
-      <img *ngIf="item.IconSource" [src]="item.IconSource" width="64"> {{item.GuideSourceName}} -> <span [innerHTML]="item.PrettyDisplayNames"></span>
+      <img *ngIf="item.IconSource" [src]="item.IconSource" width="64"> {{item.GuideSourceName}} -> <span [innerHTML]="item.PrettyDisplayName"></span>
     </ng-template>
     <ng-template ng-option-tmp let-item="item">
-      <img *ngIf="item.IconSource" [src]="item.IconSource" width="64"> <span [innerHTML]="item.PrettyDisplayNames"></span>
+      <img *ngIf="item.IconSource" [src]="item.IconSource" width="64"> <span [innerHTML]="item.PrettyDisplayName"></span>
     </ng-template>
   </ng-select>
 
