@@ -1,11 +1,10 @@
 <div class="container">
   <h1>Overview of lines:</h1>
-  <div *ngIf="(lineup$ | async) as lineup">
+  <div *ngFor="let lineup of (lineups$ | async)">
     <ul class="list-group">
-      <li *ngFor="let line of lineup" class="list-group-item">
-        <b>{{ line.GuideNumber }}: </b>
-        {{ line.GuideName }} <span *ngIf="line.HD" class="badge badge-primary badge-pill">HD</span>&nbsp;
-        <small class="text-muted">{{ line.URL }}</small>
+      <li *ngFor="let line of lineup.Channels" class="list-group-item">
+        <b>{{ line.ChannelNumber }}: </b>
+        {{ line.Title }} <span *ngIf="line.HD" class="badge badge-primary badge-pill">HD</span><span *ngIf="line.Favorite" class="badge badge-primary badge-pill">Favorite</span>&nbsp;
       </li>
     </ul>
   </div>

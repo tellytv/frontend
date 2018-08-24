@@ -1,0 +1,62 @@
+<div class="container-fluid" *ngIf="(lineup$ | async) as lineup">
+  <h1>Manage Lineup "{{ lineup.Name }}"</h1>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Channel #</th>
+          <th scope="col">Name</th>
+          <th scope="col">Video Track</th>
+          <th scope="col">Guide Channel</th>
+          <th scope="col">HD</th>
+          <th scope="col">Favorite</th>
+          <th scope="col">Shows Only</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let channel of lineup.Channels" app-lineup-row [lineup]="lineup" [channel]="channel" [guideChannels]="guideChannels$ | async" [videoTracks]="videoTracks$ | async"></tr>
+        <tr>
+          <th scope="row"></th>
+          <td><input type="text" size="5" [(ngModel)]="newLineupChannel.ChannelNumber"></td>
+          <td><input type="text" [(ngModel)]="newLineupChannel.ChannelName"></td>
+          <td>
+            <ng-select [items]="videoTracks$ | async"
+                       bindLabel="Name"
+                       bindValue="ID"
+                       groupBy="VideoSourceName"
+                       [(ngModel)]="newLineupChannel.VideoTrackID"
+                       [searchFn]="searchVideoTracks">
+                       <ng-template ng-label-tmp let-item="item">
+                         <img *ngIf="item.IconSource" [src]="item.IconSource" width="64"> {{item.VideoSourceName}} -> {{ item.Name }}
+                       </ng-template>
+                       <ng-template ng-option-tmp let-item="item">
+                         <img *ngIf="item.IconSource" [src]="item.IconSource" width="64"> {{ item.Name }}
+                       </ng-template>
+            </ng-select>
+          </td>
+          <td>
+            <ng-select [items]="guideChannels$ | async"
+                       bindLabel="PrettyDisplayNames"
+                       bindValue="ID"
+                       groupBy="GuideSourceName"
+                       [(ngModel)]="newLineupChannel.GuideChannelID"
+                       [searchFn]="searchGuideChannels">
+              <ng-template ng-label-tmp let-item="item">
+                <img *ngIf="item.IconSource" [src]="item.IconSource" width="64"> {{item.GuideSourceName}} -> <span [innerHTML]="item.PrettyDisplayNames"></span>
+              </ng-template>
+              <ng-template ng-option-tmp let-item="item">
+                <img *ngIf="item.IconSource" [src]="item.IconSource" width="64"> <span [innerHTML]="item.PrettyDisplayNames"></span>
+              </ng-template>
+            </ng-select>
+
+          </td>
+          <td><input type="checkbox" checked [(ngModel)]="newLineupChannel.HD"></td>
+          <td><input type="checkbox" [(ngModel)]="newLineupChannel.Favorite"></td>
+          <td><input type="checkbox" checked></td>
+          <td><button class="btn btn-primary" (click)="addChannelToLineup()">Add</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
