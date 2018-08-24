@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '@environment';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Lineup } from '@app/lineup/models/lineup.model';
 import { LineupChannel } from '@app/lineup/models/lineup-channel.model';
 
@@ -18,7 +19,17 @@ export class LineupService {
   ) { }
 
   getLineup(lineupID: number): Observable<Lineup> {
-    return this.http.get<Lineup>(`${this.url}/${lineupID}`);
+    return this.http.get<Lineup>(`${this.url}/${lineupID}`).pipe(
+      map((lineup) => {
+        if (!lineup.Channels) {
+          lineup.Channels = [];
+        }
+        if (!lineup.DisabledChannels) {
+          lineup.DisabledChannels = [];
+        }
+        return lineup;
+      })
+    );
   }
 
   getLineupChannels(lineupID: number): Observable<LineupChannel[]> {
