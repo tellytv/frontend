@@ -4,19 +4,20 @@ import { NgModule } from '@angular/core';
 import { NgPipesModule } from 'angular-pipes';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
+import { DragulaModule } from 'ng2-dragula';
 
 import { AppComponent } from './app.component';
 import { LineupOverviewComponent } from './lineup/components/lineup-overview/lineup-overview.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { LineupManagerComponent } from './lineup/components/lineup-manager/lineup-manager.component';
-import { LineupRowComponent } from './lineup/components/lineup-row/lineup-row.component';
+import { ChannelEditModalComponent } from './lineup/components/channel-edit-modal/channel-edit-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LineupOverviewComponent,
     LineupManagerComponent,
-    LineupRowComponent
+    ChannelEditModalComponent
   ],
   imports: [
     HttpClientModule,
@@ -24,7 +25,8 @@ import { LineupRowComponent } from './lineup/components/lineup-row/lineup-row.co
     NgSelectModule,
     FormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DragulaModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
