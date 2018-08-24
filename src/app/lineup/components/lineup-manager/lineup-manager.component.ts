@@ -17,10 +17,10 @@ import { Observable } from 'rxjs/internal/Observable';
   styleUrls: ['./lineup-manager.component.scss']
 })
 export class LineupManagerComponent implements OnInit {
-  lineup$: Observable<Lineup> = [];
+  lineup$: Observable<Lineup>;
   guideChannels$: Observable<GuideSourceChannel[]>;
   videoTracks$: Observable<VideoSourceTrack[]>;
-  private newLineupChannel: LineupChannel = {};
+  newLineupChannel: Observable<LineupChannel> = new Observable<LineupChannel>();
 
   constructor(
     private lineupService: LineupService,
@@ -35,8 +35,8 @@ export class LineupManagerComponent implements OnInit {
   }
 
   addChannelToLineup() {
-    this.lineup$.channels.push(this.newLineupChannel)
-    this.newLineupChannel = {};
+    console.log('Add channel', this.newLineupChannel);
+    this.newLineupChannel = null;
   }
 
 }
