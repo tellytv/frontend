@@ -14,8 +14,6 @@ export class LineupRowComponent {
   @Input() guideChannels: GuideSourceChannel[];
   @Input() channel: LineupChannel;
 
-  constructor() { }
-
   searchVideoTracks(term: string, item: VideoSourceTrack): boolean {
     term = term.toLocaleLowerCase();
     return item.RawLine.toLocaleLowerCase().indexOf(term) > -1;
