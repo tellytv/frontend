@@ -1,64 +1,41 @@
-<div class="container-fluid" *ngIf="(lineup$ | async) as lineup">
-  <h1>Manage Lineup "{{ lineup.Name }}"</h1>
-  <div class="table-responsive">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col"></th>
-          <th scope="col">Channel #</th>
-          <th scope="col">Name</th>
-          <th scope="col">Video Track</th>
-          <th scope="col">Guide Channel</th>
-          <th scope="col">HD</th>
-          <th scope="col">Favorite</th>
-          <th scope="col">Shows Only</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let channel of lineup.Channels">
-          <app-lineup-row [channel]="channel" [guideChannels]="guideChannels$ | async" [videoTracks]="videoTracks$ | async"></app-lineup-row>
-        </tr>
-        <tr>
-          <th scope="row"></th>
-          <td><input type="text" size="5" [(ngModel)]="newLineupChannel.ChannelNumber"></td>
-          <td><input type="text" [(ngModel)]="newLineupChannel.ChannelName"></td>
-          <td>
-            <ng-select [items]="videoTracks$ | async"
-                       bindLabel="Name"
-                       bindValue="ID"
-                       groupBy="VideoSourceName"
-                       [(ngModel)]="newLineupChannel.VideoTrackID"
-                       [searchFn]="searchVideoTracks">
-                       <ng-template ng-label-tmp let-item="item">
-                         <img *ngIf="item.IconSource" [src]="item.IconSource" width="64"> {{item.VideoSourceName}} -> {{ item.Name }}
-                       </ng-template>
-                       <ng-template ng-option-tmp let-item="item">
-                         <img *ngIf="item.IconSource" [src]="item.IconSource" width="64"> {{ item.Name }}
-                       </ng-template>
-            </ng-select>
-          </td>
-          <td>
-            <ng-select [items]="guideChannels$ | async"
-                       bindLabel="PrettyDisplayName"
-                       bindValue="ID"
-                       groupBy="GuideSourceName"
-                       [(ngModel)]="newLineupChannel.GuideChannelID"
-                       [searchFn]="searchGuideChannels">
-              <ng-template ng-label-tmp let-item="item">
-                <img *ngIf="item.IconSource" [src]="item.IconSource" width="64"> {{item.GuideSourceName}} -> <span [innerHTML]="item.PrettyDisplayName"></span>
-              </ng-template>
-              <ng-template ng-option-tmp let-item="item">
-                <img *ngIf="item.IconSource" [src]="item.IconSource" width="64"> <span [innerHTML]="item.PrettyDisplayName"></span>
-              </ng-template>
-            </ng-select>
-
-          </td>
-          <td><input type="checkbox" checked [(ngModel)]="newLineupChannel.HD"></td>
-          <td><input type="checkbox" [(ngModel)]="newLineupChannel.Favorite"></td>
-          <td><input type="checkbox" checked></td>
-          <td><button class="btn btn-primary" (click)="addChannelToLineup()">Add</button></td>
-        </tr>
-      </tbody>
-    </table>
+<div class="container" *ngIf="lineup">
+  <div class="row">
+    <div class="col-6">
+      <h4>Enabled Channels</h4>
+      <ul class="list-group" [dragula]="DRAGULA_NAME" [(dragulaModel)]='lineup.Channels'>
+        <li *ngIf="!lineup.Channels || !(lineup.Channels.length > 0)" class="list-group-item">
+          Drag a channel here to enable it.
+        </li>
+        <li *ngFor="let channel of lineup.Channels" class="list-group-item">
+          <b>{{ channel.ChannelNumber }}: </b>
+          {{ channel.Title }}
+          <span *ngIf="channel.HD" class="badge badge-primary badge-pill">HD</span>
+          <span *ngIf="channel.Favorite" class="badge badge-primary badge-pill">Favorite</span>
+          <a class="pointer float-right" (click)="editingChannel = channel"><i class="fas fa-edit"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-6">
+      <h4>Disabled Channels</h4>
+      <ul class="list-group" [dragula]="DRAGULA_NAME" [(dragulaModel)]='lineup.DisabledChannels'>
+        <li *ngIf="!lineup.DisabledChannels || !(lineup.DisabledChannels.length > 0)" class="list-group-item">
+          Drag a channel here to disable it.
+        </li>
+        <li *ngFor="let line of lineup.DisabledChannels" class="list-group-item">
+          <b>{{ line.ChannelNumber }}: </b>
+          {{ line.Title }}
+          <span *ngIf="line.HD" class="badge badge-primary badge-pill">HD</span>
+          <span *ngIf="line.Favorite" class="badge badge-primary badge-pill">Favorite</span>
+          <a class="pointer float-right" (click)="editingChannel = channel"><i class="fas fa-edit"></i></a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
+
+<app-channel-edit-modal
+  [channel]="editingChannel"
+  [videoTracks]="videoTracks$ | async"
+  [guideChannels]="guideChannels$ | async"
+  (close)="editingChannel = undefined">
+</app-channel-edit-modal>
