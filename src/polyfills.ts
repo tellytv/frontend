@@ -80,3 +80,5 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
  * APPLICATION IMPORTS
  */
 /* tslint:enable */
+
+(window as any).global = window;
