@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/scss/bootstrap';
-@import "~@ng-select/ng-select/themes/default.theme.css";
+@import '~@ng-select/ng-select/themes/default.theme.css';
+@import 'dragula.scss';
 
 .pointer {
   cursor: pointer;
@@ -8,4 +9,9 @@
 
 .table {
   margin-bottom: 500px;
+}
+
+.modal-show {
+  display: block;
+  background-color: rgba(140, 140, 140, .6);
 }
