@@ -53,6 +53,11 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
+  saveChannels(): void {
+    // TODO: Add some fancy loaders to the page
+    this.lineupService.updateLineupChannels(1, this.lineup.Channels).subscribe((lineup) => this.lineup = lineup);
+  }
+
   addChannel(): void {
     const channelNumber = this.lineup.Channels.length + 1;
     const newChannel: LineupChannel = {
