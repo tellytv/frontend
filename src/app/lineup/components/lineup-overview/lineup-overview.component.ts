@@ -16,7 +16,7 @@ export class LineupOverviewComponent implements OnInit {
     private lineupService: LineupService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.lineups$ = this.lineupService.getLineups();
   }
 

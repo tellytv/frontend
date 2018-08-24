@@ -28,14 +28,14 @@ export class LineupManagerComponent implements OnInit {
     private videoSourceService: VideoSourceService,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.lineup$ = this.lineupService.getLineup(1);
     this.guideChannels$ = this.guideSourceService.getAllChannels();
     this.videoTracks$ = this.videoSourceService.getAllTracks();
   }
 
-  addChannelToLineup() {
-    console.log('Add channel', this.newLineupChannel);
+  addChannelToLineup(): void {
+    // TODO: Add channel
     this.newLineupChannel = null;
   }
 

@@ -1,18 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Lineup } from '@app/lineup/models/lineup.model';
 import { LineupChannel } from '@app/lineup/models/lineup-channel.model';
-import { GuideSource } from '@app/lineup/models/guide-source.model';
 import { GuideSourceChannel } from '@app/lineup/models/guide-source-channel.model';
-import { VideoSource } from '@app/lineup/models/video-source.model';
 import { VideoSourceTrack } from '@app/lineup/models/video-source-track.model';
 
 
 @Component({
-  selector: '[app-lineup-row]',
+  selector: 'app-lineup-row',
   templateUrl: './lineup-row.component.html',
   styleUrls: ['./lineup-row.component.scss']
 })
-export class LineupRowComponent implements OnInit {
+export class LineupRowComponent {
 
   @Input() lineup: Lineup;
   @Input() videoTracks: VideoSourceTrack[];
@@ -21,22 +19,20 @@ export class LineupRowComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
-
-  searchVideoTracks(term: string, item: VideoSourceTrack) {
+  searchVideoTracks(term: string, item: VideoSourceTrack): boolean {
     term = term.toLocaleLowerCase();
     return item.RawLine.toLocaleLowerCase().indexOf(term) > -1;
   }
 
-  searchGuideChannels(term: string, item: GuideSourceChannel) {
+  searchGuideChannels(term: string, item: GuideSourceChannel): boolean {
     term = term.toLocaleLowerCase();
-    var foundMatch = false;
+    let foundMatch = false;
     item.DisplayNames.forEach((displayName) => {
-      if(displayName.value.toLocaleLowerCase().indexOf(term) > -1) {
+      if (displayName.value.toLocaleLowerCase().indexOf(term) > -1) {
         foundMatch = true;
       }
     });
-    if(item.XMLTVID.toLocaleLowerCase().indexOf(term) > -1) {
+    if (item.XMLTVID.toLocaleLowerCase().indexOf(term) > -1) {
       foundMatch = true;
     }
     return foundMatch;

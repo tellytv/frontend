@@ -23,18 +23,18 @@ export class GuideSourceService {
   }
 
   getAllChannels(): Observable<GuideSourceChannel[]> {
-    return this.http.get<GuideSourceChannel[]>(`${this.url}/channels`).pipe(map((chann) => { return this.mapChannel(chann) }));
+    return this.http.get<GuideSourceChannel[]>(`${this.url}/channels`).pipe(map((chann) => this.mapChannel(chann) ));
   }
 
   mapChannel(allChannels: GuideSourceChannel[]): GuideSourceChannel[] {
     // This is needed for pretty output in ng-select
     return allChannels.map((aChannel) => {
-      let joinedNames = aChannel.DisplayNames.map((displayName) => { return `"${displayName.value}"` }).join(', ')
-      aChannel.PrettyDisplayNames = `${joinedNames} (<code>${aChannel.XMLTVID}</code>)`
-      if(aChannel.Icons) {
+      const joinedNames = aChannel.DisplayNames.map((displayName) => `"${displayName.value}"`).join(', ');
+      aChannel.PrettyDisplayNames = `${joinedNames} (<code>${aChannel.XMLTVID}</code>)`;
+      if (aChannel.Icons) {
         aChannel.IconSource = aChannel.Icons[0].source;
       }
       return aChannel;
-    })
+    });
   }
 }
