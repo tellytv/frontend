@@ -15,7 +15,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let channel of lineup.Channels" app-lineup-row [lineup]="lineup" [channel]="channel" [guideChannels]="guideChannels$ | async" [videoTracks]="videoTracks$ | async"></tr>
+        <tr *ngFor="let channel of lineup.Channels">
+          <app-lineup-row [channel]="channel" [guideChannels]="guideChannels$ | async" [videoTracks]="videoTracks$ | async"></app-lineup-row>
+        </tr>
         <tr>
           <th scope="row"></th>
           <td><input type="text" size="5" [(ngModel)]="newLineupChannel.ChannelNumber"></td>

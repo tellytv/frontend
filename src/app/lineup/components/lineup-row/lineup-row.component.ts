@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Lineup } from '@app/lineup/models/lineup.model';
 import { LineupChannel } from '@app/lineup/models/lineup-channel.model';
 import { GuideSourceChannel } from '@app/lineup/models/guide-source-channel.model';
 import { VideoSourceTrack } from '@app/lineup/models/video-source-track.model';
@@ -11,8 +10,6 @@ import { VideoSourceTrack } from '@app/lineup/models/video-source-track.model';
   styleUrls: ['./lineup-row.component.scss']
 })
 export class LineupRowComponent {
-
-  @Input() lineup: Lineup;
   @Input() videoTracks: VideoSourceTrack[];
   @Input() guideChannels: GuideSourceChannel[];
   @Input() channel: LineupChannel;
