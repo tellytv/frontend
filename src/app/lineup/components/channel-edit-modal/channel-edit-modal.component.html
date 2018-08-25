@@ -10,6 +10,10 @@
       <div class="modal-body">
         <form #channelForm="ngForm">
           <div class="form-group">
+            <label for="channelNumber">Channel Number</label>
+            <input type="text" class="form-control" id="channelNumber" name="channelNumber" placeholder="Channel Number" [(ngModel)]="channel.ChannelNumber">
+          </div>
+          <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" id="title" name="title" placeholder="Title" [(ngModel)]="channel.Title">
           </div>
@@ -32,10 +36,10 @@
             <ng-select [items]="videoTracks" bindLabel="Name" bindValue="ID" groupBy="VideoSourceName" name="videoTrack" [(ngModel)]="channel.VideoTrackID"
               [searchFn]="searchVideoTracks">
               <ng-template ng-label-tmp let-item="item">
-                {{item.VideoSourceName}} -> {{ item.Name }}
+                {{item.VideoSourceName}} -> {{ item.Name }} <code *ngIf="item.Tags['tvg-id']">({{ item.Tags['tvg-id'] }})</code>
               </ng-template>
               <ng-template ng-option-tmp let-item="item">
-                {{ item.Name }}
+                {{ item.Name }} <code *ngIf="item.Tags['tvg-id']">({{ item.Tags['tvg-id'] }})</code>
               </ng-template>
             </ng-select>
           </div>

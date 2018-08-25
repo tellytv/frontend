@@ -12,7 +12,7 @@
           <span *ngIf="channel.HD" class="badge badge-primary badge-pill">HD</span>
           <span *ngIf="channel.Favorite" class="badge badge-primary badge-pill">Favorite</span>
           <span class="float-right">
-            <a *ngIf="channel.VideoTrack" class="pointer pr-2" [href]="channel.VideoTrack.StreamURL"><i class="fas fa-play"></i></a>
+            <a *ngIf="channel.VideoTrack" class="pointer pr-2" [href]="channel.HDHR.URL"><i class="fas fa-play"></i></a>
             <a class="pointer pr-2" (click)="editingChannel = channel"><i class="fas fa-edit"></i></a>
             <a class="pointer" (click)="removeChannel(channel)"><i class="fas fa-trash"></i></a>
           </span>
