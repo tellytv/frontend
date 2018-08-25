@@ -2,15 +2,17 @@ export interface GuideSourceChannel {
   ID: number;
   GuideID: number;
   XMLTVID: string;
-  DisplayNames: XMLTVCommonElement[];
-  URLs: XMLTVCommonElement[];
-  Icons: XMLTVIcon[];
-  ChannelNumber: string;
-  HD: boolean;
+  Data: XMLTVChannel;
   ImportedAt: Date;
   GuideSourceName: string;
   PrettyDisplayName: string;
   IconSource?: string;
+}
+
+export interface XMLTVChannel {
+  displayNames: XMLTVCommonElement[];
+  urls: XMLTVCommonElement[];
+  icons: XMLTVIcon[];
 }
 
 export interface XMLTVCommonElement {

@@ -29,10 +29,10 @@ export class GuideSourceService {
   mapChannel(allChannels: GuideSourceChannel[]): GuideSourceChannel[] {
     // This is needed for pretty output in ng-select
     return allChannels.map((aChannel) => {
-      const joinedNames = aChannel.DisplayNames.map((displayName) => `"${displayName.value}"`).join(', ');
+      const joinedNames = aChannel.Data.displayNames.map((displayName) => `"${displayName.value}"`).join(', ');
       aChannel.PrettyDisplayName = `${joinedNames} (<code>${aChannel.XMLTVID}</code>)`;
-      if (aChannel.Icons) {
-        aChannel.IconSource = aChannel.Icons[0].source;
+      if (aChannel.Data.icons) {
+        aChannel.IconSource = aChannel.Data.icons[0].source;
       }
       return aChannel;
     });
