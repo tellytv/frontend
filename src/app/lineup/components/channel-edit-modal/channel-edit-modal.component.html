@@ -11,8 +11,8 @@
         <form #channelForm="ngForm">
           <div class="form-group">
             <label for="guideChannel">Guide Channel</label>
-            <ng-select [items]="guideChannels" bindLabel="PrettyDisplayName" bindValue="ID" groupBy="GuideSourceName" name="guideChannel" [(ngModel)]="channel.GuideChannelID"
-              [searchFn]="searchGuideChannels">
+            <ng-select [items]="guideChannels" bindLabel="PrettyDisplayName" bindValue="ID" groupBy="GuideSourceName" name="guideChannel"
+              [(ngModel)]="channel.GuideChannelID" [searchFn]="searchGuideChannels">
               <ng-template ng-label-tmp let-item="item">
                 {{item.GuideSourceName}} -> <span [innerHTML]="item.PrettyDisplayName"></span>
               </ng-template>
@@ -34,9 +34,18 @@
               </ng-template>
             </ng-select>
           </div>
-          <div class="form-group">
-            <label for="channelNumber">Channel Number</label>
-            <input type="text" class="form-control" id="channelNumber" name="channelNumber" placeholder="Channel Number" [(ngModel)]="channel.ChannelNumber">
+          <div class="form-row align-items-center">
+            <div class="form-group col-6">
+              <label for="channelNumber">Channel Number</label>
+              <input type="text" class="form-control" id="channelNumber" name="channelNumber" placeholder="Channel Number" [(ngModel)]="channel.ChannelNumber">
+            </div>
+            <div class="form-check col-4 ml-4">
+              <input type="checkbox" class="form-check-input" id="lockChannelNumber" name="lockChannelNumber" placeholder="LockChannelNumber"
+                [(ngModel)]="channel.LockChannelNumber">
+              <label class="form-check-label" for="lockChannelNumber">
+                Lock Channel Number?
+              </label>
+            </div>
           </div>
           <div class="form-group">
             <label for="title">Title</label>

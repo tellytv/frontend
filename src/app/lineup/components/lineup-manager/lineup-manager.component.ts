@@ -63,6 +63,7 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
     const newChannel: LineupChannel = {
       Title: '',
       ChannelNumber: `${channelNumber}`,
+      LockChannelNumber: false,
       HD: false,
       Favorite: false,
       CreatedAt: new Date()
@@ -72,9 +73,13 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
   }
 
   updateChannelNumbers(channels: LineupChannel[]): void {
+    let channelNumber = 1;
     for (let i = 0; i < channels.length; i++) {
-      const channelNumber = i + 1;
+      if (channels[i].LockChannelNumber) {
+        continue;
+      }
       channels[i].ChannelNumber = `${channelNumber}`;
+      channelNumber++;
     }
   }
 

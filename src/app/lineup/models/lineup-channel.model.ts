@@ -5,6 +5,7 @@ export interface LineupChannel {
   LineupID?: number;
   Title: string;
   ChannelNumber: string;
+  LockChannelNumber: boolean;
   VideoTrackID?: number;
   GuideChannelID?: number;
   HD: boolean;
