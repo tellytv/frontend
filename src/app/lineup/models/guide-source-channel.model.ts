@@ -1,3 +1,5 @@
+import { XMLTVChannel } from '@app/lineup/models/xmltv.model';
+
 export interface GuideSourceChannel {
   ID: number;
   GuideID: number;
@@ -7,21 +9,4 @@ export interface GuideSourceChannel {
   GuideSourceName: string;
   PrettyDisplayName: string;
   IconSource?: string;
-}
-
-export interface XMLTVChannel {
-  displayNames: XMLTVCommonElement[];
-  urls: XMLTVCommonElement[];
-  icons: XMLTVIcon[];
-}
-
-export interface XMLTVCommonElement {
-  value: string;
-  lang: string;
-}
-
-export interface XMLTVIcon {
-  source: string;
-  width: number;
-  height: number;
 }
