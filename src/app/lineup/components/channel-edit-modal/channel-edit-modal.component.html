@@ -23,14 +23,13 @@
           </div>
           <div class="form-group">
             <label for="videoTrack">Video Track</label>
-            <ng-select [items]="videoTracks" bindLabel="Name" bindValue="ID" groupBy="VideoSourceName" name="videoTrack" [(ngModel)]="channel.VideoTrackID"
-              [searchFn]="searchVideoTracks">
+            <ng-select [items]="videoTracks" bindLabel="Name" bindValue="ID" [groupBy]="videoTrackGroupBy" name="videoTrack" [(ngModel)]="channel.VideoTrackID"
+              [searchFn]="searchVideoTracks" [virtualScroll]="true">
               <ng-template ng-label-tmp let-item="item">
-                <!-- FIXME: Don't hard code tvg-id, use providers package to determine field for EPG match key. -->
-                {{item.VideoSourceName}} -> {{ item.Name }} <code *ngIf="item.Tags['tvg-id']">({{ item.Tags['tvg-id'] }})</code>
+                {{ item.VideoSourceName }} -> {{ item.Name }} <code *ngIf="item.EPGID">({{ item.EPGID }})</code>
               </ng-template>
               <ng-template ng-option-tmp let-item="item">
-                {{ item.Name }} <code *ngIf="item.Tags['tvg-id']">({{ item.Tags['tvg-id'] }})</code>
+                {{ item.Name }} <code *ngIf="item.EPGID">({{ item.EPGID }})</code>
               </ng-template>
             </ng-select>
           </div>

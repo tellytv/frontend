@@ -14,6 +14,14 @@ export class ChannelEditModalComponent {
   @Output() save = new EventEmitter<LineupChannel>();
   @Output() close = new EventEmitter<LineupChannel>();
 
+  videoTrackGroupBy = (item) => {
+    return `${item.VideoSourceName} -> ${item.Category}`
+  };
+
+  searchVideoTracks = (search: string, item: any): boolean => {
+    return (item.VideoSourceName + ' ' + item.Category + ' ' + item.Name).toLowerCase().includes(search.toLowerCase());
+  }
+
   closeEditChannel(): void {
     this.close.emit(this.channel);
   }
