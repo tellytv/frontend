@@ -15,8 +15,8 @@ export class ChannelEditModalComponent {
   @Output() close = new EventEmitter<LineupChannel>();
 
   videoTrackGroupBy = (item) => {
-    return `${item.VideoSourceName} -> ${item.Category}`
-  };
+    return `${item.VideoSourceName} -> ${item.Category}`;
+  }
 
   searchVideoTracks = (search: string, item: any): boolean => {
     return (item.VideoSourceName + ' ' + item.Category + ' ' + item.Name).toLowerCase().includes(search.toLowerCase());
