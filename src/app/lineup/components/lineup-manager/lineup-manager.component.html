@@ -6,9 +6,12 @@
 </div>
 
 <div class="container" *ngIf="lineup">
+  <!-- <div class="row">
+    <button class="btn btn-primary mt-4 float-right" (click)="addChannel()">Add Channel <i class="material-icons">playlist_add</i></button>
+  </div> -->
   <div class="row">
     <div class="col">
-      <a class="float-right pr-3 pointer" (click)="addChannel()"><i class="fas fa-plus"></i></a>
+      <button class="btn btn-secondary mb-4 float-right" (click)="addChannel()">Add Channel <i class="material-icons">add_to_queue</i></button>
       <ul class="list-group chlist" [dragula]="DRAGULA_NAME" [(dragulaModel)]='lineup.Channels'>
         <li *ngIf="!lineup.Channels || !(lineup.Channels.length > 0)" class="list-group-item">
           Drag a channel here to enable it.
@@ -17,9 +20,9 @@
           <span class="chlist__channel-number">{{ ("000" + channel.ChannelNumber).slice(-3) }}</span>
           <span class="chlist__channel-name">{{ channel.Title }} <span *ngIf="channel.HD" class="badge badge-primary float-right">HD</span><span *ngIf="channel.Favorite" class="badge badge-primary float-right">Favorite</span></span>
           <span class="chlist__channel-actions">
-            <a *ngIf="channel.VideoTrack" class="chlist__channel-action pointer pr-2" [href]="channel.HDHR.URL"><i class="fas fa-play"></i></a>
-            <a class="chlist__channel-action pointer pr-2" (click)="editingChannel = channel"><i class="fas fa-edit"></i></a>
-            <a class="chlist__channel-action pointer" (click)="removeChannel(channel)"><i class="fas fa-trash"></i></a>
+            <a *ngIf="channel.VideoTrack" class="chlist__channel-action pointer" [href]="channel.HDHR.URL"><i class="material-icons">play_arrow</i></a>
+            <a class="chlist__channel-action pointer" (click)="editingChannel = channel"><i class="material-icons">edit</i></a>
+            <a class="chlist__channel-action chlist__channel-action--delete pointer" (click)="removeChannel(channel)"><i class="material-icons">delete_forever</i></a>
           </span>
         </li>
       </ul>
