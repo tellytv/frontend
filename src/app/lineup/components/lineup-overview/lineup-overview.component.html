@@ -1,10 +1,16 @@
+<div class="heading">
+  <div class="container">
+    <h1>Lineup Overview</h1>
+    <p class="heading__sub">All channels currently being served by Telly</p>
+  </div>
+</div>
+
 <div class="container">
-  <h1>Overview of lines:</h1>
   <div *ngFor="let lineup of (lineups$ | async)">
-    <ul class="list-group">
+    <ul class="chlist list-group">
       <li *ngFor="let line of lineup.Channels" class="list-group-item">
-        <b>{{ line.ChannelNumber }}: </b>
-        {{ line.Title }} <span *ngIf="line.HD" class="badge badge-primary badge-pill">HD</span><span *ngIf="line.Favorite" class="badge badge-primary badge-pill">Favorite</span>&nbsp;
+        <span class="chlist__channel-number">{{ ("000" + line.ChannelNumber).slice(-3) }}</span>
+        <span class="chlist__channel-name">{{ line.Title }} <span *ngIf="line.HD" class="badge badge-primary float-right">HD</span><span *ngIf="line.Favorite" class="badge badge-primary float-right">Favorite</span></span>
       </li>
     </ul>
   </div>
