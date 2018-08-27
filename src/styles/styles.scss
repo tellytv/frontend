@@ -86,6 +86,8 @@ h1 {
 
 // Channel List
 .chlist {
+  float:right;
+
   .badge {
     margin-left: 5px;
     vertical-align: middle;
@@ -117,13 +119,40 @@ h1 {
 }
 
 .chlist__channel-actions {
-  min-width: 75px;
+  min-width: 100px;
   display: table-cell;
+  vertical-align: middle;
 }
 
 .chlist__channel-action {
+  background: $colors--offwhite-1;
+  border: 1px solid $colors--offwhite-1;
+  border-radius: 2px;
   display: inline-block;
+  margin-right: 7px;
+  padding: 2px 2px 0 2px;
+  transition: background 0.25s ease, color 0.25s ease;
+
+  &:hover {
+    background: $colors--offwhite-0;
+    color: $colors--aqua !important;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  .material-icons {
+    font-size: 1.2em;
+  }
 }
+
+.chlist__channel-action--delete {
+  &:hover {
+    color: $colors--red !important;
+  }
+}
+
 
 /*
 Bootstrap Overrides
@@ -165,6 +194,38 @@ Bootstrap Overrides
   background: $colors--orange
 }
 
+// Buttons
+.btn {
+  border-radius: 2px;
+  font-family: $fonts--signika;
+  font-size: 0.8em;
+  text-transform: uppercase;
+
+  .material-icons {
+    font-size: inherit;
+    position: relative;
+    top: 2px;
+  }
+}
+.btn-primary {
+  background-color: $colors--aqua;
+  border-color: $colors--aqua;
+  &:hover {
+    background-color: $colors--aqua-highlight;
+    border-color: $colors--aqua;
+    color: $colors--slate;
+  }
+}
+
+// Modals
+.modal-content {
+  border-radius: 2px;
+}
+
+.modal-title {
+  font-family: $fonts--signika;
+  text-transform: uppercase;
+}
 
 // Misc
 .pointer {
