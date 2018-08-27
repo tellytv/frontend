@@ -11,13 +11,13 @@
         <form #channelForm="ngForm">
           <div class="form-group">
             <label for="guideChannel">Guide Channel</label>
-            <ng-select [items]="guideChannels" bindLabel="PrettyDisplayName" bindValue="ID" groupBy="GuideSourceName" name="guideChannel"
+            <ng-select [items]="guideChannels" bindLabel="PrettyDisplayName" bindValue="ID" [groupBy]="guideChannelGroupBy" name="guideChannel"
               [(ngModel)]="channel.GuideChannelID" [searchFn]="searchGuideChannels">
               <ng-template ng-label-tmp let-item="item">
-                {{item.GuideSourceName}} -> <span [innerHTML]="item.PrettyDisplayName"></span>
+                {{ item.GuideSourceName }} -> {{ item.Data.Lineup }} -> {{ item.Data.Name }} (<code>{{ item.XMLTVID }}</code>)
               </ng-template>
               <ng-template ng-option-tmp let-item="item">
-                <span [innerHTML]="item.PrettyDisplayName"></span>
+                {{ item.Data.Name }} (<code>{{ item.XMLTVID }}</code>)
               </ng-template>
             </ng-select>
           </div>

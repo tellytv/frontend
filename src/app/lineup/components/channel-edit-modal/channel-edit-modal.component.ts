@@ -18,8 +18,16 @@ export class ChannelEditModalComponent {
     return `${item.VideoSourceName} -> ${item.Category}`;
   }
 
+  guideChannelGroupBy = (item) => {
+    return `${item.GuideSourceName} -> ${item.Data.Lineup}`;
+  }
+
   searchVideoTracks = (search: string, item: any): boolean => {
-    return (item.VideoSourceName + ' ' + item.Category + ' ' + item.Name).toLowerCase().includes(search.toLowerCase());
+    return (item.VideoSourceName + ' ' + item.Category + ' ' + item.Name + ' ' + item.EPGID).toLowerCase().includes(search.toLowerCase());
+  }
+
+  searchGuideChannels = (search: string, item: any): boolean => {
+    return (item.GuideSourceName + item.Data.Name + ' ' + item.XMLTVID).toLowerCase().includes(search.toLowerCase());
   }
 
   closeEditChannel(): void {
