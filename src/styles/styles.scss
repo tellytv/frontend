@@ -227,6 +227,62 @@ Bootstrap Overrides
   text-transform: uppercase;
 }
 
+.modal {
+  animation: test 0.25s ease 0s forwards;
+  background: rgba(0, 0, 0, 0.25);
+  display: block;
+  opacity: 0;
+}
+
+.modal-dialog {
+  animation: test1 0.25s ease 0.15s forwards;
+  transform: translateY(-50px);
+}
+
+@keyframes test {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes test1 {
+  0% { opacity: 0; }
+  100% { opacity: 1; transform: translateY(0px); }
+}
+
+.modal-dialog {
+  opacity: 0;
+}
+
+
+// Forms
+label {
+  font-family: $fonts--signika;
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+.form-control {
+  border-radius: 0px;
+
+  &:focus {
+    border-color: $colors--orange;
+    box-shadow: 0 0 0 0.2rem rgba(250, 105, 0, 0.25)
+  }
+}
+
+// NG-Selected Overrides
+.ng-select {
+  .ng-select-container {
+    border-radius: 0px;
+  }
+}
+
+.ng-dropdown-panel {
+  &.ng-select-bottom {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
 // Misc
 .pointer {
   cursor: pointer;
