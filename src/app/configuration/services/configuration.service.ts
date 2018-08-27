@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from '@environment';
 
 import { GuideSource, VideoSource } from '@app/lineup/models';
-import { CreateGuideProvider } from '@app/configuration/models';
+import { CreateGuideProvider, CreateVideoProvider } from '@app/configuration/models';
 
 @Injectable({
   providedIn: 'root'
