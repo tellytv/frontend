@@ -4,8 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@environment';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Lineup } from '@app/lineup/models/lineup.model';
-import { LineupChannel } from '@app/lineup/models/lineup-channel.model';
+import { CreateLineup, Lineup, LineupChannel } from '@app/lineup/models';
 
 
 @Injectable({
@@ -17,6 +16,10 @@ export class LineupService {
   constructor(
     private http: HttpClient
   ) { }
+
+  createLineup(lineup: CreateLineup): Observable<Lineup> {
+    return this.http.post<Lineup>(`${this.url}`, lineup);
+  }
 
   getLineup(lineupID: number): Observable<Lineup> {
     return this.http.get<Lineup>(`${this.url}/${lineupID}`).pipe(
