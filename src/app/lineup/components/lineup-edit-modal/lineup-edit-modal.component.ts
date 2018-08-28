@@ -15,7 +15,7 @@ export class LineupEditModalComponent implements OnChanges {
 
   ngOnChanges(): void {
     if (this.newLineup) {
-      this.lineup = {
+      this.lineup = <CreateLineup>{
         Name: ''
       };
     }
