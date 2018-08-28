@@ -7,17 +7,21 @@ import { FormsModule } from '@angular/forms';
 import { DragulaModule } from 'ng2-dragula';
 
 import { AppComponent } from './app.component';
-import { LineupOverviewComponent } from './lineup/components/lineup-overview/lineup-overview.component';
 import { AppRoutingModule } from './/app-routing.module';
-import { LineupManagerComponent } from './lineup/components/lineup-manager/lineup-manager.component';
-import { ChannelEditModalComponent } from './lineup/components/channel-edit-modal/channel-edit-modal.component';
+import { LineupManagerComponent,
+  ChannelEditModalComponent,
+  LineupEditModalComponent,
+  LineupManagerOverviewComponent,
+  LineupOverviewComponent } from './lineup/components';
 
 @NgModule({
   declarations: [
     AppComponent,
     LineupOverviewComponent,
     LineupManagerComponent,
-    ChannelEditModalComponent
+    ChannelEditModalComponent,
+    LineupManagerOverviewComponent,
+    LineupEditModalComponent
   ],
   imports: [
     HttpClientModule,

@@ -1,0 +1,32 @@
+<div class="heading">
+  <div class="container">
+    <h1>Lineup Manager Overview</h1>
+    <p class="heading__sub">Add, remove, or update lines served by Telly</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-secondary mb-4 float-right"
+              (click)="addLineup()">Add New Lineup <i class="material-icons">add_to_queue</i></button>
+
+      <ul class="chlist list-group">
+        <li *ngFor="let lineup of (lineups$ | async)"
+            class="list-group-item">
+          <span class="chlist__channel-number">{{ lineup.ID | number: '3.0-0' }}</span>
+          <span class="chlist__channel-name">{{ lineup.Name }} <a routerLink="/lineup/manage/{{ lineup.ID }}"
+               class="badge badge-primary float-right">Edit this lineup</a></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<app-lineup-edit-modal
+  [newLineup]="addingLineup"
+  [lineup]="editingLineup"
+  (close)="editingLineup = undefined; addingLineup = false;"
+  (create)="createLineup($event)">
+</app-lineup-edit-modal>
