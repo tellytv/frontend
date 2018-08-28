@@ -128,7 +128,12 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "typedef": [true, "call-signature", "parameter", "property-declaration"],
+    "typedef": [
+      true,
+      "call-signature",
+      "parameter",
+      "property-declaration",
+      "arrow-parameter"],
     "arrow-parens": true
   }
 }
