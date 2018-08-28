@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
 import { map, switchMap, share } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-lineup-manager',
@@ -40,19 +40,26 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.lineupId$ = this.route.params.pipe(map((params) => parseInt(params['id'], 10)));
+    this.lineupId$ = this.route.params.pipe(map((params: Params) => parseInt(params['id'], 10)));
 
     this.lineup$ = this.lineupId$.pipe(
-      switchMap((lineupId) => {
+      switchMap((lineupId: number) => {
         return this.lineupService.getLineup(lineupId);
       }),
       share()
+    ).pipe(
+      map((lineup: Lineup) => {
+        lineup.Channels.sort((a: LineupChannel, b: LineupChannel) => {
+          return parseInt(a.ChannelNumber, 10) < parseInt(b.ChannelNumber, 10) ? -1 : 1;
+        });
+        return lineup;
+      })
     );
 
     this.guideChannels$ = this.guideSourceService.getAllChannels();
     this.videoTracks$ = this.videoSourceService.getAllTracks();
 
-    this.lineup$.subscribe((lineup) => {
+    this.lineup$.subscribe((lineup: Lineup) => {
       this.lineup = lineup;
     });
 
@@ -70,7 +77,7 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
 
   saveChannels(): void {
     // TODO: Add some fancy loaders to the page
-    this.lineupService.updateLineupChannels(this.lineup.ID, this.lineup.Channels).subscribe((lineup) => this.lineup = lineup);
+    this.lineupService.updateLineupChannels(this.lineup.ID, this.lineup.Channels).subscribe((lineup: Lineup) => this.lineup = lineup);
   }
 
   addChannel(): void {
