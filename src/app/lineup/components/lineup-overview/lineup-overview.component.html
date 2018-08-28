@@ -6,7 +6,11 @@
 </div>
 
 <div class="container">
-  <div *ngFor="let lineup of (lineups$ | async)">
+  <div *ngFor="let lineup of (lineups$ | async)" class="row mb-4">
+    <h4>{{ lineup.Name }}</h4>
+    <p *ngIf="!lineup.Channels || lineup.Channels.length === 0" class="col-12 pl-0">
+        No channels yet, go to manage to add channels to this lineup!
+    </p>
     <ul class="chlist list-group">
       <li *ngFor="let line of lineup.Channels" class="list-group-item">
         <span class="chlist__channel-number">{{ line.ChannelNumber | number: '3.0-0' }}</span>
