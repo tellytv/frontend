@@ -1,0 +1,20 @@
+<h4>Guide Providers</h4>
+<ul class="list-group chlist">
+  <li *ngFor="let provider of providers" class="list-group-item">
+    <span class="chlist__channel-number">{{ provider.ID }}</span>
+    <span class="chlist__channel-name">{{ provider.Name }}</span>
+    <span class="chlist__channel-actions">
+      <a class="chlist__channel-action pointer" (click)="editingProvider = provider"><i class="material-icons">edit</i></a>
+      <a class="chlist__channel-action chlist__channel-action--delete pointer" (click)="removeProvider(channel)"><i class="material-icons">delete_forever</i></a>
+    </span>
+  </li>
+</ul>
+<button class="btn btn-secondary mt-2 float-right"
+(click)="addProvider()">Add Guide Provider <i class="material-icons">library_add</i></button>
+
+<app-edit-guideprovider-modal
+  [newProvider]="addingProvider"
+  [provider]="editingProvider"
+  (close)="closeModal()"
+  (create)="createProvider($event)">
+</app-edit-guideprovider-modal>

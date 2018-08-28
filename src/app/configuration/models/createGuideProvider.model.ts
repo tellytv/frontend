@@ -1,10 +1,16 @@
 export interface CreateGuideProvider {
   Name: string;
   Provider: GuideProvider;
-  Username: string;
-  Password: string;
+
+  // SchedulesDirect
+  Username?: string;
+  Password?: string;
+
+  // XMLTV
+  XMLTV_URL?: string;
 }
 
 export enum GuideProvider {
-  SchedulesDirect = 'SchedulesDirect'
+  SchedulesDirect = 'SchedulesDirect',
+  XMLTV = 'XMLTV'
 }

@@ -1,0 +1,69 @@
+<div *ngIf="provider" class="modal modal-animate" tabindex="-1" id="providerEditModal" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 *ngIf="newProvider" class="modal-title" id="providerEditModal">Add Guide Provider</h5>
+        <h5 *ngIf="!newProvider" class="modal-title" id="providerEditModal">Edit Provider: {{ provider.Name }}</h5>
+        <button type="button" class="close" (click)="this.close.emit()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #channelForm="ngForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name" [(ngModel)]="provider.Name">
+          </div>
+          <div class="form-group">
+            <label for="provider">Provider</label>
+            <select class="custom-select" name="provider" [(ngModel)]="provider.Provider">
+              <option value="Xtream">Xtream</option>
+              <option value="M3U">M3U</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Only for Xtream" [(ngModel)]="provider.Username">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="text" class="form-control" id="password" name="password" placeholder="Only for Xtream" [(ngModel)]="provider.Password">
+          </div>
+          <div class="form-group">
+            <label for="baseurl">BaseUrl</label>
+            <input type="text" class="form-control" id="baseurl" name="baseurl" placeholder="Only for Xtream" [(ngModel)]="provider.BaseUrl">
+          </div>
+          <div class="form-group">
+            <label for="M3UURL">M3UURL</label>
+            <input type="text" class="form-control" id="M3UURL" name="M3UURL" placeholder="Only for M3U" [(ngModel)]="provider.M3UURL">
+          </div>
+          <!-- TODO: Fix scrolling a modal -->
+          <!-- <div class="form-group">
+            <label for="NameKey">NameKey</label>
+            <input type="text" class="form-control" id="NameKey" name="NameKey" placeholder="Only for M3U" [(ngModel)]="provider.NameKey">
+          </div>
+          <div class="form-group">
+            <label for="LogoKey">LogoKey</label>
+            <input type="text" class="form-control" id="LogoKey" name="LogoKey" placeholder="Only for M3U" [(ngModel)]="provider.LogoKey">
+          </div>
+          <div class="form-group">
+            <label for="CategoryKey">CategoryKey</label>
+            <input type="text" class="form-control" id="CategoryKey" name="CategoryKey" placeholder="Only for M3U" [(ngModel)]="provider.CategoryKey">
+          </div>
+          <div class="form-group">
+            <label for="EPGIDKey">EPGIDKey</label>
+            <input type="text" class="form-control" id="EPGIDKey" name="EPGIDKey" placeholder="Only for M3U" [(ngModel)]="provider.EPGIDKey">
+          </div> -->
+        </form>
+      </div>
+      <div *ngIf="newProvider" class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="this.close.emit()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="this.create.emit()">Add Provider</button>
+      </div>
+      <div *ngIf="!newProvider" class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="this.close.emit()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="this.save.emit()">Add Provider</button>
+      </div>
+    </div>
+  </div>
+</div>

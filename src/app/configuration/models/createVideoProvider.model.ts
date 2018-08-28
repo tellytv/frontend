@@ -1,12 +1,21 @@
 export interface CreateVideoProvider {
   Name: string;
   Provider: VideoProvider;
-  BaseUrl: string;
-  Username: string;
-  Password: string;
+
+  // XTream
+  BaseUrl?: string;
+  Username?: string;
+  Password?: string;
+
+  // M3U
+  M3UURL?: string;
+  NameKey?: string;
+  LogoKey?: string;
+  CategoryKey?: string;
+  EPGIDKey?: string;
 }
 
 export enum VideoProvider {
   Xtream = 'Xtream',
-  Vaders = 'Vaders'
+  M3U = 'M3U'
 }

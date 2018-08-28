@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { LineupModule } from './lineup/lineup.module';
+import { ConfigurationModule } from './configuration/configuration.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { LineupModule } from './lineup/lineup.module';
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    LineupModule
+    LineupModule,
+    ConfigurationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

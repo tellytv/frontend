@@ -1,0 +1,17 @@
+<div class="heading">
+    <div class="container">
+      <h1>Configuration of Telly</h1>
+      <p class="heading__sub">Manage the configuration of Telly, like video and guide providers</p>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <app-configuration-guideprovider [providers]="$guideProviders | async"></app-configuration-guideprovider>
+    </div>
+    <div class="col-6">
+      <app-configuration-videoprovider [providers]="$videoProviders | async"></app-configuration-videoprovider>
+    </div>
+  </div>
+</div>
