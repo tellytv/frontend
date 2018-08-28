@@ -17,6 +17,8 @@ export interface XMLTVChannel {
   icons?: (IconsEntity)[] | null;
   urls?: (string)[] | null;
   id: string;
+
+  Lineup?: string; // TODO: Check the naming
 }
 
 export interface XMLTVCommonElement {
