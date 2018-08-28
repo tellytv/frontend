@@ -55,7 +55,7 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
 
   saveChannels(): void {
     // TODO: Add some fancy loaders to the page
-    this.lineupService.updateLineupChannels(1, this.lineup.Channels).subscribe((lineup) => this.lineup = lineup);
+    this.lineupService.updateLineupChannels(this.lineup.ID, this.lineup.Channels).subscribe((lineup) => this.lineup = lineup);
   }
 
   addChannel(): void {

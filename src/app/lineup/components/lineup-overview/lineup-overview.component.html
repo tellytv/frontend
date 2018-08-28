@@ -9,7 +9,7 @@
   <div *ngFor="let lineup of (lineups$ | async)">
     <ul class="chlist list-group">
       <li *ngFor="let line of lineup.Channels" class="list-group-item">
-        <span class="chlist__channel-number">{{ ("000" + line.ChannelNumber).slice(-3) }}</span>
+        <span class="chlist__channel-number">{{ line.ChannelNumber | number: '3.0-0' }}</span>
         <span class="chlist__channel-name">{{ line.Title }} <span *ngIf="line.HD" class="badge badge-primary float-right">HD</span><span *ngIf="line.Favorite" class="badge badge-primary float-right">Favorite</span></span>
       </li>
     </ul>
