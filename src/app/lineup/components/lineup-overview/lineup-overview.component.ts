@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { LineupService } from '@app/lineup/services/lineup.service';
-import { Line } from '@app/lineup/models/line.model';
+import { Lineup } from '@app/lineup/models/lineup.model';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
@@ -10,14 +10,14 @@ import { Observable } from 'rxjs/internal/Observable';
   styleUrls: ['./lineup-overview.component.scss']
 })
 export class LineupOverviewComponent implements OnInit {
-  lineup$: Observable<Line[]>;
+  lineups$: Observable<Lineup[]>;
 
   constructor(
     private lineupService: LineupService
   ) { }
 
-  ngOnInit() {
-    this.lineup$ = this.lineupService.getLineup();
+  ngOnInit(): void {
+    this.lineups$ = this.lineupService.getLineups();
   }
 
 }

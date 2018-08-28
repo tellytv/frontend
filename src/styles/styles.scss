@@ -1,0 +1,298 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/scss/bootstrap';
+@import '~@ng-select/ng-select/themes/default.theme.css';
+@import 'dragula.scss';
+@import './vars';
+
+html, body {
+  font-family: $fonts--roboto;
+}
+
+// Heading Tags
+h1 {
+  color: $colors--slate;
+  font-family: 'Signika', sans-serif;
+  font-size: 1em;
+  margin: 0 0 3px;
+  text-transform: uppercase;
+}
+
+// Page Header
+.header {
+  position: relative;
+  z-index: 100;
+}
+
+// Telly Logo
+.logo {
+  font-family: $fonts--signika;
+  letter-spacing: 3px;
+  outline: none;
+  text-transform: uppercase;
+}
+.logo__image {
+  margin: 0 5px 0 0;
+  position: relative;
+  top: -5px;
+}
+
+// Page Navigation
+.navigation {
+  height: 70px;
+  font-family: $fonts--roboto;
+  font-size: 0.7em;
+  text-transform: uppercase;
+}
+.navigation__item {
+  color: $colors--slate;
+  height: 100%;
+  border-left: 1px solid $colors--grey1;
+  display: inline-block;
+  padding: 27px 20px;
+  transition: background 0.5s ease, color 0.5s ease;
+  vertical-align: middle;
+
+  &:hover {
+    background: $colors--offwhite-1;
+    color: $colors--orange !important;
+    text-decoration: none;
+
+    svg {
+      fill: $colors--orange;
+    }
+
+  }
+  // Sets sizes of inline SVGs in navigation items
+  svg {
+    width: 14px;
+    height: 14px;
+    transition: fill 0.5s ease
+  }
+}
+
+// Page Heading/Subheading
+.heading {
+  background: $colors--offwhite-1;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  margin: 0 0 20px;
+  padding: 15px 0;
+}
+.heading__sub {
+  font-family: $fonts--roboto;
+  font-size: 0.8em;
+  margin: 0;
+  opacity: 0.5;
+}
+
+// Channel List
+.chlist {
+  float:right;
+
+  .badge {
+    margin-left: 5px;
+    vertical-align: middle;
+  }
+  .list-group-item {
+    &:hover {
+      .chlist__channel-number {
+        color: $colors--aqua;
+      }
+    }
+  }
+}
+
+.chlist__channel-name {
+  width: 100%;
+  display: table-cell;
+  padding: 10px 20px;
+}
+
+.chlist__channel-number {
+  min-width: 75px;
+  height: 100%;
+  border-right: 1px solid rgba(0, 0, 0, 0.125);
+  display: table-cell;
+  font-family: $fonts--sharetech;
+  font-size: 0.8em;
+  text-align: center;
+  transition: color 0.5s ease;
+}
+
+.chlist__channel-actions {
+  min-width: 100px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.chlist__channel-action {
+  background: $colors--offwhite-1;
+  border: 1px solid $colors--offwhite-1;
+  border-radius: 2px;
+  display: inline-block;
+  margin-right: 7px;
+  padding: 2px 2px 0 2px;
+  transition: background 0.25s ease, color 0.25s ease;
+
+  &:hover {
+    background: $colors--offwhite-0;
+    color: $colors--aqua !important;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  .material-icons {
+    font-size: 1.2em;
+  }
+}
+
+.chlist__channel-action--delete {
+  &:hover {
+    color: $colors--red !important;
+  }
+}
+
+
+/*
+Bootstrap Overrides
+ */
+
+// List Group
+.list-group-item {
+  line-height: 100%;
+  padding: 0;
+  transition: background 0.5s ease, box-shadow 0.25s ease 0.15s, transform 0.25s ease;
+
+  &:hover {
+    background: $colors--offwhite-0;
+    box-shadow: 0px 4px 3px -2px rgba(0,0,0,0.10);
+    transform: scale(1.003);
+  }
+
+  &:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  &:last-child {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+
+// Badge
+.badge {
+  border-radius: 0;
+  font-family: $fonts--signika;
+  padding: 0.29em 0.33em 0.15em;
+  text-transform: uppercase;
+}
+
+.badge-primary {
+  background: $colors--orange
+}
+
+// Buttons
+.btn {
+  border-radius: 2px;
+  font-family: $fonts--signika;
+  font-size: 0.8em;
+  text-transform: uppercase;
+
+  .material-icons {
+    font-size: inherit;
+    position: relative;
+    top: 2px;
+  }
+}
+.btn-primary {
+  background-color: $colors--aqua;
+  border-color: $colors--aqua;
+  &:hover {
+    background-color: $colors--aqua-highlight;
+    border-color: $colors--aqua;
+    color: $colors--slate;
+  }
+}
+
+// Modals
+.modal-content {
+  border-radius: 2px;
+}
+
+.modal-title {
+  font-family: $fonts--signika;
+  text-transform: uppercase;
+}
+
+.modal {
+  animation: test 0.25s ease 0s forwards;
+  background: rgba(0, 0, 0, 0.25);
+  display: block;
+  opacity: 0;
+}
+
+.modal-dialog {
+  animation: test1 0.25s ease 0.15s forwards;
+  transform: translateY(-50px);
+}
+
+@keyframes test {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes test1 {
+  0% { opacity: 0; }
+  100% { opacity: 1; transform: translateY(0px); }
+}
+
+.modal-dialog {
+  opacity: 0;
+}
+
+
+// Forms
+label {
+  font-family: $fonts--signika;
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+.form-control {
+  border-radius: 0px;
+
+  &:focus {
+    border-color: $colors--orange;
+    box-shadow: 0 0 0 0.2rem rgba(250, 105, 0, 0.25)
+  }
+}
+
+// NG-Selected Overrides
+.ng-select {
+  .ng-select-container {
+    border-radius: 0px;
+  }
+}
+
+.ng-dropdown-panel {
+  &.ng-select-bottom {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+// Misc
+.pointer {
+  cursor: pointer;
+}
+
+.table {
+  margin-bottom: 500px;
+}
+
+.modal-show {
+  display: block;
+  background-color: rgba(140, 140, 140, .6);
+}

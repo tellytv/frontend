@@ -1,20 +1,29 @@
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgPipesModule } from 'angular-pipes';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { LineupOverviewComponent } from './lineup/components/lineup-overview/lineup-overview.component';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
+
+import { LineupModule } from './lineup/lineup.module';
+import { ConfigurationModule } from './configuration/configuration.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LineupOverviewComponent
+    AppComponent
   ],
   imports: [
     HttpClientModule,
+    NgPipesModule,
+    NgSelectModule,
+    FormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    LineupModule,
+    ConfigurationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

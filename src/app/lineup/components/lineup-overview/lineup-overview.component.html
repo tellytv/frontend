@@ -1,11 +1,20 @@
+<div class="heading">
+  <div class="container">
+    <h1>Lineup Overview</h1>
+    <p class="heading__sub">All channels currently being served by Telly</p>
+  </div>
+</div>
+
 <div class="container">
-  <h1>Overview of lines:</h1>
-  <div *ngIf="(lineup$ | async) as lineup">
-    <ul class="list-group">
-      <li *ngFor="let line of lineup" class="list-group-item">
-        <b>{{ line.GuideNumber }}: </b>
-        {{ line.GuideName }} <span *ngIf="line.HD" class="badge badge-primary badge-pill">HD</span>&nbsp;
-        <small class="text-muted">{{ line.URL }}</small>
+  <div *ngFor="let lineup of (lineups$ | async)" class="row mb-4">
+    <h4>{{ lineup.Name }}</h4>
+    <p *ngIf="!lineup.Channels || lineup.Channels.length === 0" class="col-12 pl-0">
+        No channels yet, go to manage to add channels to this lineup!
+    </p>
+    <ul class="chlist list-group">
+      <li *ngFor="let line of lineup.Channels" class="list-group-item">
+        <span class="chlist__channel-number">{{ line.ChannelNumber | number: '3.0-0' }}</span>
+        <span class="chlist__channel-name">{{ line.Title }} <span *ngIf="line.HD" class="badge badge-primary float-right">HD</span><span *ngIf="line.Favorite" class="badge badge-primary float-right">Favorite</span></span>
       </li>
     </ul>
   </div>

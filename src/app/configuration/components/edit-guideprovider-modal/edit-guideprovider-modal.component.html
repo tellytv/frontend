@@ -1,0 +1,48 @@
+<div *ngIf="provider" class="modal modal-animate" id="providerEditModal" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 *ngIf="newProvider" class="modal-title" id="providerEditModal">Add Guide Provider</h5>
+        <h5 *ngIf="!newProvider" class="modal-title" id="providerEditModal">Edit Provider: {{ provider.Name }}</h5>
+        <button type="button" class="close" (click)="this.close.emit()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #channelForm="ngForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name" [(ngModel)]="provider.Name">
+          </div>
+          <div class="form-group">
+            <label for="provider">Provider</label>
+            <select class="custom-select" name="provider" [(ngModel)]="provider.Provider">
+              <option value="SchedulesDirect">SchedulesDirect</option>
+              <option value="XMLTV">XMLTV</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Only for SD" [(ngModel)]="provider.Username">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="text" class="form-control" id="password" name="password" placeholder="Only for SD" [(ngModel)]="provider.Password">
+          </div>
+          <div class="form-group">
+            <label for="XMLTV_URL">XMLTVURL</label>
+            <input type="text" class="form-control" id="XMLTV_URL" name="XMLTV_URL" placeholder="Only for XMLTV" [(ngModel)]="provider.XMLTV_URL">
+          </div>
+        </form>
+      </div>
+      <div *ngIf="newProvider" class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="this.close.emit()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="this.create.emit()">Add Provider</button>
+      </div>
+      <div *ngIf="!newProvider" class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="this.close.emit()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="this.save.emit()">Add Provider</button>
+      </div>
+    </div>
+  </div>
+</div>
