@@ -7,6 +7,5 @@ export interface GuideSourceChannel {
   Data: XMLTVChannel;
   ImportedAt: Date;
   GuideSourceName: string;
-  PrettyDisplayName: string;
   IconSource?: string;
 }

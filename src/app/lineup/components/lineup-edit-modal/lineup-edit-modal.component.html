@@ -1,0 +1,29 @@
+<div *ngIf="lineup || newLineup" class="modal modal-animate" id="lineupEditModal" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 *ngIf="newLineup" class="modal-title" id="lineupEditModal">New Lineup</h5>
+          <h5 *ngIf="!newLineup" class="modal-title" id="lineupEditModal">Edit Lineup: {{ lineup.Name }}</h5>
+          <button type="button" class="close" (click)="closeEditLineup()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #channelForm="ngForm">
+            <div class="form-group">
+              <label for="title">Name</label>
+              <input type="text" class="form-control" id="title" name="title" placeholder="name" [(ngModel)]="lineup.Name">
+            </div>
+          </form>
+        </div>
+        <div *ngIf="newLineup" class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeEditLineup()">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="createLineup()">Create Lineup</button>
+          </div>
+        <div *ngIf="!newLineup" class="modal-footer">
+          <small>These changes will be saved when you save all your lineups.</small>
+          <button type="button" class="btn btn-primary" (click)="closeEditLineup()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,4 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { NgPipesModule } from 'angular-pipes';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
@@ -7,12 +8,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { DragulaModule } from 'ng2-dragula';
 
-import { LineupOverviewComponent } from './components/lineup-overview/lineup-overview.component';
-import { LineupManagerComponent } from './components/lineup-manager/lineup-manager.component';
-import { ChannelEditModalComponent } from './components/channel-edit-modal/channel-edit-modal.component';
+import { LineupManagerComponent,
+  ChannelEditModalComponent,
+  LineupEditModalComponent,
+  LineupManagerOverviewComponent,
+  LineupOverviewComponent } from './components';
 
 @NgModule({
   imports: [
+    RouterModule,
     HttpClientModule,
     NgPipesModule,
     NgSelectModule,
@@ -24,6 +28,8 @@ import { ChannelEditModalComponent } from './components/channel-edit-modal/chann
   declarations: [
     LineupOverviewComponent,
     LineupManagerComponent,
+    LineupEditModalComponent,
+    LineupManagerOverviewComponent,
     ChannelEditModalComponent
   ]
 })

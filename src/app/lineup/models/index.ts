@@ -1,3 +1,4 @@
+export * from './create-lineup.model';
 export * from './guide-source-channel.model';
 export * from './guide-source.model';
 export * from './lineup-channel.model';

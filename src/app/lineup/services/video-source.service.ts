@@ -23,15 +23,6 @@ export class VideoSourceService {
   }
 
   getAllTracks(): Observable<VideoSourceTrack[]> {
-    return this.http.get<VideoSourceTrack[]>(`${this.url}/tracks`).pipe(map((trk) => this.mapTrack(trk) ));
-  }
-
-  mapTrack(allTracks: VideoSourceTrack[]): VideoSourceTrack[] {
-    return allTracks.map((aTrack) => {
-      if (aTrack.Tags && aTrack.Tags['tvg-logo']) {
-        aTrack.IconSource = aTrack.Tags['tvg-logo'];
-      }
-      return aTrack;
-    });
+    return this.http.get<VideoSourceTrack[]>(`${this.url}/tracks`);
   }
 }

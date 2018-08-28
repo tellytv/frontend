@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LineupOverviewComponent } from '@app/lineup/components/lineup-overview/lineup-overview.component';
-import { LineupManagerComponent } from '@app/lineup/components/lineup-manager/lineup-manager.component';
+import { LineupOverviewComponent, LineupManagerComponent, LineupManagerOverviewComponent } from '@app/lineup/components';
 
 const routes: Routes = [
   { path: '', redirectTo: '/lineup', pathMatch: 'full' },
   { path: 'lineup', component: LineupOverviewComponent },
-  { path: 'lineup/manage', component: LineupManagerComponent }
+  { path: 'lineup/manage', component: LineupManagerOverviewComponent },
+  { path: 'lineup/manage/:id', component: LineupManagerComponent }
 ];
 
 @NgModule({

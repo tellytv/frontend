@@ -8,6 +8,8 @@ import { LineupChannel, GuideSourceChannel, VideoSourceTrack } from '@app/lineup
 import { Observable } from 'rxjs/internal/Observable';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
+import { map, switchMap, share } from 'rxjs/operators';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-lineup-manager',
@@ -17,6 +19,7 @@ import { Subscription } from 'rxjs';
 export class LineupManagerComponent implements OnInit, OnDestroy {
   DRAGULA_NAME = 'LINES';
 
+  lineupId$: Observable<number>;
   lineup$: Observable<Lineup>;
   guideChannels$: Observable<GuideSourceChannel[]>;
   videoTracks$: Observable<VideoSourceTrack[]>;
@@ -24,6 +27,7 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
 
   lineup: Lineup;
 
+  addingChannel = false;
   editingChannel: LineupChannel;
 
   subs = new Subscription();
@@ -32,15 +36,24 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
     private lineupService: LineupService,
     private guideSourceService: GuideSourceService,
     private videoSourceService: VideoSourceService,
-    private dragulaService: DragulaService
+    private dragulaService: DragulaService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.lineup$ = this.lineupService.getLineup(1);
+    this.lineupId$ = this.route.params.pipe(map((params: Params) => parseInt(params['id'], 10)));
+
+    this.lineup$ = this.lineupId$.pipe(
+      switchMap((lineupId: number) => {
+        return this.lineupService.getLineup(lineupId);
+      }),
+      share()
+    );
+
     this.guideChannels$ = this.guideSourceService.getAllChannels();
     this.videoTracks$ = this.videoSourceService.getAllTracks();
 
-    this.lineup$.subscribe((lineup) => {
+    this.lineup$.subscribe((lineup: Lineup) => {
       this.lineup = lineup;
     });
 
@@ -55,7 +68,12 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
 
   saveChannels(): void {
     // TODO: Add some fancy loaders to the page
-    this.lineupService.updateLineupChannels(1, this.lineup.Channels).subscribe((lineup) => this.lineup = lineup);
+    this.lineupService.updateLineupChannels(this.lineup.ID, this.lineup.Channels).subscribe((lineup: Lineup) => this.lineup = lineup);
+  }
+
+  closeModal(): void {
+    this.addingChannel = false;
+    delete this.editingChannel;
   }
 
   addChannel(): void {
@@ -68,8 +86,15 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
       Favorite: false,
       CreatedAt: new Date()
     };
-    this.lineup.Channels.push(newChannel);
+    this.addingChannel = true;
     this.editingChannel = newChannel;
+  }
+
+  addNewChannel(): void {
+    if (this.addingChannel) {
+      this.lineup.Channels.push(this.editingChannel);
+    }
+    this.closeModal();
   }
 
   updateChannelNumbers(channels: LineupChannel[]): void {

@@ -1,8 +1,9 @@
-<div *ngIf="channel" class="modal fade show modal-show" id="channelEditModal" role="dialog">
+<div *ngIf="channel" class="modal modal-animate" id="channelEditModal" role="dialog">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="channelEditModal">Edit Channel: {{ channel.Title }}</h5>
+        <h5 *ngIf="newChannel" class="modal-title" id="channelEditModal">Add Channel</h5>
+        <h5 *ngIf="!newChannel" class="modal-title" id="channelEditModal">Edit Channel: {{ channel.Title }}</h5>
         <button type="button" class="close" (click)="closeEditChannel()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -11,26 +12,25 @@
         <form #channelForm="ngForm">
           <div class="form-group">
             <label for="guideChannel">Guide Channel</label>
-            <ng-select [items]="guideChannels" bindLabel="PrettyDisplayName" bindValue="ID" groupBy="GuideSourceName" name="guideChannel"
+            <ng-select [items]="guideChannels" bindLabel="PrettyDisplayName" bindValue="ID" [groupBy]="guideChannelGroupBy" name="guideChannel"
               [(ngModel)]="channel.GuideChannelID" [searchFn]="searchGuideChannels">
               <ng-template ng-label-tmp let-item="item">
-                {{item.GuideSourceName}} -> <span [innerHTML]="item.PrettyDisplayName"></span>
+                {{ item.GuideSourceName }} -> {{ item.Data.Lineup }} -> {{ item.Data.Name }} (<code>{{ item.XMLTVID }}</code>)
               </ng-template>
               <ng-template ng-option-tmp let-item="item">
-                <span [innerHTML]="item.PrettyDisplayName"></span>
+                {{ item.Data.Name }} (<code>{{ item.XMLTVID }}</code>)
               </ng-template>
             </ng-select>
           </div>
           <div class="form-group">
             <label for="videoTrack">Video Track</label>
-            <ng-select [items]="videoTracks" bindLabel="Name" bindValue="ID" groupBy="VideoSourceName" name="videoTrack" [(ngModel)]="channel.VideoTrackID"
-              [searchFn]="searchVideoTracks">
+            <ng-select [items]="videoTracks" bindLabel="Name" bindValue="ID" [groupBy]="videoTrackGroupBy" name="videoTrack" [(ngModel)]="channel.VideoTrackID"
+              [searchFn]="searchVideoTracks" [virtualScroll]="true">
               <ng-template ng-label-tmp let-item="item">
-                <!-- FIXME: Don't hard code tvg-id, use providers package to determine field for EPG match key. -->
-                {{item.VideoSourceName}} -> {{ item.Name }} <code *ngIf="item.Tags['tvg-id']">({{ item.Tags['tvg-id'] }})</code>
+                {{ item.VideoSourceName }} -> {{ item.Name }} <code *ngIf="item.EPGID">({{ item.EPGID }})</code>
               </ng-template>
               <ng-template ng-option-tmp let-item="item">
-                {{ item.Name }} <code *ngIf="item.Tags['tvg-id']">({{ item.Tags['tvg-id'] }})</code>
+                {{ item.Name }} <code *ngIf="item.EPGID">({{ item.EPGID }})</code>
               </ng-template>
             </ng-select>
           </div>
@@ -67,7 +67,11 @@
           </div>
         </form>
       </div>
-      <div class="modal-footer">
+      <div *ngIf="newChannel" class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeEditChannel()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="addChannel()">Add Channel</button>
+      </div>
+      <div *ngIf="!newChannel" class="modal-footer">
         <small>These changes will be saved when you save all your channels.</small>
         <button type="button" class="btn btn-primary" (click)="closeEditChannel()">Close</button>
       </div>
