@@ -7,6 +7,7 @@ import { GuideSourceChannel, LineupChannel, VideoSourceTrack, VideoSource } from
   styleUrls: ['./channel-edit-modal.component.scss']
 })
 export class ChannelEditModalComponent {
+  @Input() newChannel: boolean;
   @Input() channel: LineupChannel;
   @Input() videoTracks: VideoSourceTrack[];
   @Input() guideChannels: GuideSourceChannel[];
@@ -28,6 +29,10 @@ export class ChannelEditModalComponent {
 
   searchGuideChannels(search: string, item: any): boolean {
     return (item.GuideSourceName + item.Data.Name + ' ' + item.XMLTVID).toLowerCase().includes(search.toLowerCase());
+  }
+
+  addChannel(): void {
+    this.save.emit();
   }
 
   closeEditChannel(): void {

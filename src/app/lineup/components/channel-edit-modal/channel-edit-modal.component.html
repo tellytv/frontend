@@ -2,7 +2,8 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="channelEditModal">Edit Channel: {{ channel.Title }}</h5>
+        <h5 *ngIf="newChannel" class="modal-title" id="channelEditModal">Add Channel</h5>
+        <h5 *ngIf="!newChannel" class="modal-title" id="channelEditModal">Edit Channel: {{ channel.Title }}</h5>
         <button type="button" class="close" (click)="closeEditChannel()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -66,7 +67,11 @@
           </div>
         </form>
       </div>
-      <div class="modal-footer">
+      <div *ngIf="newChannel" class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeEditChannel()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="addChannel()">Add Channel</button>
+      </div>
+      <div *ngIf="!newChannel" class="modal-footer">
         <small>These changes will be saved when you save all your channels.</small>
         <button type="button" class="btn btn-primary" (click)="closeEditChannel()">Close</button>
       </div>

@@ -27,6 +27,7 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
 
   lineup: Lineup;
 
+  addingChannel = false;
   editingChannel: LineupChannel;
 
   subs = new Subscription();
@@ -59,9 +60,6 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
     this.subs.add(this.dragulaService.drop(this.DRAGULA_NAME).subscribe(() => {
       this.updateChannelNumbers(this.lineup.Channels);
     }));
-
-
-
   }
 
   ngOnDestroy(): void {
@@ -71,6 +69,11 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
   saveChannels(): void {
     // TODO: Add some fancy loaders to the page
     this.lineupService.updateLineupChannels(this.lineup.ID, this.lineup.Channels).subscribe((lineup: Lineup) => this.lineup = lineup);
+  }
+
+  closeModal(): void {
+    this.addingChannel = false;
+    delete this.editingChannel;
   }
 
   addChannel(): void {
@@ -83,8 +86,15 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
       Favorite: false,
       CreatedAt: new Date()
     };
-    this.lineup.Channels.push(newChannel);
+    this.addingChannel = true;
     this.editingChannel = newChannel;
+  }
+
+  addNewChannel(): void {
+    if (this.addingChannel) {
+      this.lineup.Channels.push(this.editingChannel);
+    }
+    this.closeModal();
   }
 
   updateChannelNumbers(channels: LineupChannel[]): void {

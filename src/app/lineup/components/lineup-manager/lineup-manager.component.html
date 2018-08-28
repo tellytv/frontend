@@ -30,8 +30,10 @@
 </div>
 
 <app-channel-edit-modal
+  [newChannel]="addingChannel"
   [channel]="editingChannel"
   [videoTracks]="videoTracks$ | async"
   [guideChannels]="guideChannels$ | async"
-  (close)="editingChannel = undefined">
+  (save)="addNewChannel()"
+  (close)="closeModal()">
 </app-channel-edit-modal>
