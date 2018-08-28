@@ -11,7 +11,8 @@
       <button class="btn btn-secondary mb-4 float-right" (click)="addChannel()">Add Channel <i class="material-icons">add_to_queue</i></button>
       <ul class="list-group chlist" [dragula]="DRAGULA_NAME" [(dragulaModel)]='lineup.Channels'>
         <li *ngIf="!lineup.Channels || !(lineup.Channels.length > 0)" class="list-group-item">
-          Click "ADD CHANNEL" to add your first channel to this lineup!
+          <span class="chlist__channel-number">000</span>
+          <span class="chlist__channel-name">Click "ADD CHANNEL" to add your first channel to this lineup!</span>
         </li>
         <li *ngFor="let channel of lineup.Channels" class="list-group-item">
           <span class="chlist__channel-number">{{ channel.ChannelNumber | number: '3.0-0' }}</span>
