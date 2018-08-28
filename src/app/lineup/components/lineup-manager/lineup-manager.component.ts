@@ -47,13 +47,6 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
         return this.lineupService.getLineup(lineupId);
       }),
       share()
-    ).pipe(
-      map((lineup: Lineup) => {
-        lineup.Channels.sort((a: LineupChannel, b: LineupChannel) => {
-          return parseInt(a.ChannelNumber, 10) < parseInt(b.ChannelNumber, 10) ? -1 : 1;
-        });
-        return lineup;
-      })
     );
 
     this.guideChannels$ = this.guideSourceService.getAllChannels();
