@@ -24,8 +24,11 @@
           </span>
         </li>
       </ul>
-      <button type="button" class="btn btn-primary mt-4 float-right" (click)="saveChannels()">Save all changes</button>
     </div>
+  </div>
+  <div class="mt-4 float-right">
+    <small>When saving channels, the tuner will reload and any stream/recording in Plex will be stopped. </small>
+    <button type="button" class="btn btn-primary" (click)="saveChannels()">Save all changes</button>
   </div>
 </div>
 
