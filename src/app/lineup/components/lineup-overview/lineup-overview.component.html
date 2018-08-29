@@ -1,21 +1,71 @@
 <div class="heading">
   <div class="container">
-    <h1>Lineup Overview</h1>
+    <h1 class="page-heading">Lineup Overview</h1>
     <p class="heading__sub">All channels currently being served by Telly</p>
   </div>
 </div>
 
 <div class="container">
   <div *ngFor="let lineup of (lineups$ | async)" class="row mb-4">
-    <h4>{{ lineup.Name }}</h4>
+
     <p *ngIf="!lineup.Channels || lineup.Channels.length === 0" class="col-12 pl-0">
         No channels yet, go to manage to add channels to this lineup!
     </p>
-    <ul class="chlist list-group">
-      <li *ngFor="let line of lineup.Channels" class="list-group-item">
-        <span class="chlist__channel-number">{{ line.ChannelNumber | number: '3.0-0' }}</span>
-        <span class="chlist__channel-name">{{ line.Title }} <span *ngIf="line.HD" class="badge badge-primary float-right">HD</span><span *ngIf="line.Favorite" class="badge badge-primary float-right">Favorite</span></span>
-      </li>
-    </ul>
+    <div class="table__wrap">
+      <h4 class="page-heading page-heading__no-transform"><i class="material-icons mr-2">view_list</i> {{ lineup.Name }}</h4>
+      <table class="table chlist">
+        <thead>
+          <tr>
+            <th scope="col">CH. No</th>
+            <th colspan="2" scope="col">CH. Name</th>
+            <th class="table__head--actions" scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody [dragula]="DRAGULA_NAME" [(dragulaModel)]='lineup.Channels'>
+          <tr *ngFor="let line of lineup.Channels">
+            <!-- {{ line | json }} -->
+            <td class="table__id align-middle">{{ line.ChannelNumber | number: '3.0-0' }}</td>
+            <td *ngIf="line.VideoTrack && line.VideoTrack.Logo" class="table__image align-middle"><img src="{{line.VideoTrack.Logo}}" /></td>
+            <td *ngIf="!line.VideoTrack || line.VideoTrack && !line.VideoTrack.Logo" class="table__image align-middle">
+              <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+                  <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                  fill="#000000" stroke="none">
+                    <path d="M3868 5018 c-64 -51 -578 -551 -968 -942 l-285 -286 -50 0 -50 0
+                    -200 201 c-282 283 -489 476 -519 481 -65 13 -160 -74 -160 -147 0 -43 2 -45
+                    360 -412 l304 -311 0 -50 0 -50 -872 -5 c-609 -4 -890 -9 -928 -17 -145 -31
+                    -315 -169 -384 -312 -27 -57 -39 -98 -46 -160 -6 -48 -10 -587 -10 -1291 l0
+                    -1209 26 -64 c41 -103 74 -155 144 -224 67 -67 153 -120 237 -145 70 -22 4123
+                    -22 4194 -1 150 46 283 159 354 301 l40 80 0 1315 0 1315 -39 79 c-73 151
+                    -236 284 -387 316 -37 8 -321 13 -926 17 l-873 5 0 50 0 50 589 596 c324 328
+                    607 619 630 645 23 27 41 59 41 71 0 51 -100 146 -154 146 -8 0 -38 -19 -68
+                    -42z m-1228 -1838 c536 -16 743 -62 894 -201 143 -130 202 -299 238 -674 16
+                    -172 16 -897 -1 -1070 -33 -352 -91 -523 -221 -655 -105 -105 -237 -161 -463
+                    -195 -301 -44 -1710 -45 -2007 0 -247 37 -377 90 -486 199 -96 96 -144 199
+                    -184 391 -37 178 -45 321 -44 810 1 512 10 640 59 839 84 337 258 474 675 532
+                    197 28 1001 40 1540 24z m1979 -611 c111 -56 161 -151 161 -309 0 -116 -19
+                    -176 -76 -240 -73 -80 -107 -94 -251 -98 -115 -4 -124 -3 -182 23 -69 31 -123
+                    85 -154 154 -18 38 -22 65 -22 161 0 99 3 122 23 165 30 65 85 122 147 151 44
+                    21 65 24 171 24 115 0 124 -1 183 -31z m-10 -781 c66 -32 125 -95 150 -162 16
+                    -44 21 -79 21 -159 0 -91 -3 -108 -28 -162 -31 -65 -77 -112 -145 -147 -35
+                    -18 -63 -23 -159 -26 -107 -4 -121 -2 -170 20 -75 34 -122 79 -155 146 -26 53
+                    -28 65 -27 177 0 98 4 128 21 165 41 91 123 158 213 172 84 13 228 1 279 -24z"/>
+                  </g>
+                </svg>No Image
+            </td>
+            <td class="table__name align-middle">{{ line.Title }} <span *ngIf="line.HD" class="badge badge-primary float-right">HD</span><span *ngIf="line.Favorite" class="badge badge-primary float-right">Favorite</span></td>
+            <td class="table__actions align-middle">
+              <a *ngIf="line.VideoTrack" class="table__action pointer" [href]="line.HDHR.URL"><i class="material-icons">play_arrow</i></a>
+              <a class="table__action pointer" (click)="editingChannel = channel"><i class="material-icons">edit</i></a>
+              <a class="table__action table__action--delete pointer" (click)="removeChannel(channel)"><i class="material-icons">delete_forever</i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+
   </div>
 </div>
