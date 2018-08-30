@@ -21,39 +21,39 @@
               <option value="M3U">M3U</option>
             </select>
           </div>
-          <div class="form-group">
+          <div *ngIf="provider.Provider == 'Xtream'" class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Only for Xtream" [(ngModel)]="provider.Username">
+            <input type="text" class="form-control" id="username" name="username" placeholder="hunter1" [(ngModel)]="provider.Username">
           </div>
-          <div class="form-group">
+          <div *ngIf="provider.Provider == 'Xtream'" class="form-group">
             <label for="password">Password</label>
-            <input type="text" class="form-control" id="password" name="password" placeholder="Only for Xtream" [(ngModel)]="provider.Password">
+            <input type="password" class="form-control" id="password" name="password" placeholder="hunter2" [(ngModel)]="provider.Password">
           </div>
-          <div class="form-group">
-            <label for="baseurl">BaseUrl</label>
-            <input type="text" class="form-control" id="baseurl" name="baseurl" placeholder="Only for Xtream" [(ngModel)]="provider.BaseUrl">
+          <div *ngIf="provider.Provider == 'Xtream'" class="form-group">
+            <label for="baseurl">Provider URL</label>
+            <input type="url" class="form-control" id="baseurl" name="baseurl" placeholder="http://irislinks.net:83" [(ngModel)]="provider.BaseUrl">
           </div>
-          <div class="form-group">
-            <label for="M3UURL">M3UURL</label>
-            <input type="text" class="form-control" id="M3UURL" name="M3UURL" placeholder="Only for M3U" [(ngModel)]="provider.M3UURL">
+          <div *ngIf="provider.Provider == 'M3U'" class="form-group">
+            <label for="M3UURL">Path to or URL of M3U file</label>
+            <input type="url" class="form-control" id="M3UURL" name="M3UURL" placeholder="Only for M3U" [(ngModel)]="provider.M3UURL">
           </div>
           <!-- TODO: Fix scrolling a modal -->
-          <!-- <div class="form-group">
-            <label for="NameKey">NameKey</label>
-            <input type="text" class="form-control" id="NameKey" name="NameKey" placeholder="Only for M3U" [(ngModel)]="provider.NameKey">
+          <div *ngIf="provider.Provider == 'M3U'" class="form-group">
+            <label for="NameKey">Key to use for channel name (e.g. <code>tvg-name</code>)</label>
+            <input type="text" class="form-control" id="NameKey" name="NameKey" placeholder="tvg-name" [(ngModel)]="provider.NameKey">
           </div>
-          <div class="form-group">
-            <label for="LogoKey">LogoKey</label>
-            <input type="text" class="form-control" id="LogoKey" name="LogoKey" placeholder="Only for M3U" [(ngModel)]="provider.LogoKey">
+          <div *ngIf="provider.Provider == 'M3U'" class="form-group">
+            <label for="LogoKey">Key to use for logo (e.g. <code>tvg-logo</code>)</label>
+            <input type="text" class="form-control" id="LogoKey" name="LogoKey" placeholder="tvg-logo" [(ngModel)]="provider.LogoKey">
           </div>
-          <div class="form-group">
-            <label for="CategoryKey">CategoryKey</label>
-            <input type="text" class="form-control" id="CategoryKey" name="CategoryKey" placeholder="Only for M3U" [(ngModel)]="provider.CategoryKey">
+          <div *ngIf="provider.Provider == 'M3U'" class="form-group">
+            <label for="CategoryKey">Key to use for group name (e.g. <code>group-title</code>)</label>
+            <input type="text" class="form-control" id="CategoryKey" name="CategoryKey" placeholder="group-title" [(ngModel)]="provider.CategoryKey">
           </div>
-          <div class="form-group">
-            <label for="EPGIDKey">EPGIDKey</label>
-            <input type="text" class="form-control" id="EPGIDKey" name="EPGIDKey" placeholder="Only for M3U" [(ngModel)]="provider.EPGIDKey">
-          </div> -->
+          <div *ngIf="provider.Provider == 'M3U'" class="form-group">
+            <label for="EPGIDKey">Key to use for EPG ID (e.g. <code>tvg-id</code>)</label>
+            <input type="text" class="form-control" id="EPGIDKey" name="EPGIDKey" placeholder="tvg-id" [(ngModel)]="provider.EPGIDKey">
+          </div>
         </form>
       </div>
       <div *ngIf="newProvider" class="modal-footer">

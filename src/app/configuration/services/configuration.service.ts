@@ -5,7 +5,12 @@ import { Observable } from 'rxjs';
 import { environment } from '@environment';
 
 import { GuideSource, VideoSource } from '@app/lineup/models';
-import { CreateGuideProvider, CreateVideoProvider } from '@app/configuration/models';
+import {
+  CreateGuideProvider,
+  CreateVideoProvider,
+  GuideProviderCoverageArea,
+  GuideProviderAvailableLineup
+} from '@app/configuration/models';
 import { GuideSourceService } from '@app/lineup/services/guide-source.service';
 import { VideoSourceService } from '@app/lineup/services/video-source.service';
 
@@ -35,5 +40,22 @@ export class ConfigurationService {
 
   getVideoProviders(): Observable<VideoSource[]> {
     return this.videoSourceService.getVideoSources();
+  }
+
+  getGuideProviderCoverage(providerID: number): Observable<GuideProviderCoverageArea[]> {
+    return this.http.get<GuideProviderCoverageArea[]>(`${this.url}/guide_source/${providerID}/coverage`);
+  }
+
+  getGuideProviderLineups(providerID: number, countryCode: string, postalCode: string): Observable<GuideProviderAvailableLineup[]> {
+    const lineupUrl = `${this.url}/guide_source/${providerID}/lineups?countryCode=${countryCode}&postalCode=${postalCode}`;
+    return this.http.get<GuideProviderAvailableLineup[]>(lineupUrl);
+  }
+
+  addGuideProviderLineup(providerID: number, lineupID: string): Observable<Object> {
+    return this.http.put<Object>(`${this.url}/guide_source/${providerID}/lineups/${lineupID}`, null);
+  }
+
+  deleteGuideProviderLineup(providerID: number, lineupID: string): Observable<Object> {
+    return this.http.delete<Object>(`${this.url}/guide_source/${providerID}/lineups/${lineupID}`);
   }
 }

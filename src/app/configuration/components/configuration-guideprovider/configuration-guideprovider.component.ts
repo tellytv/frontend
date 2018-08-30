@@ -13,6 +13,7 @@ export class ConfigurationGuideproviderComponent {
 
   addingProvider = false;
   editingProvider: GuideSource | CreateGuideProvider;
+  editingProviderLineups: GuideSource;
 
   constructor(
     private configService: ConfigurationService
@@ -32,6 +33,10 @@ export class ConfigurationGuideproviderComponent {
   closeModal(): void {
     delete this.editingProvider;
     this.addingProvider = false;
+  }
+
+  closeLineupsModal(): void {
+    delete this.editingProviderLineups;
   }
 
   createProvider(): void {
