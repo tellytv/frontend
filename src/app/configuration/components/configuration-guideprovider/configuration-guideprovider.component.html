@@ -2,14 +2,14 @@
   <h6 class="table-header__heading"><i class="material-icons table-header__icon">ballot</i>Guide Providers</h6>
   <p class="table-header__body">Guide providers are used to build an XMLTV episode guide for the IPTV channels that Telly serves. Once configured, channels can be mapped to their corresponding guide data.</p>
 </div>
-<table class="table chlist">
+<table class="table">
   <tbody>
-    <tr *ngIf="providers === null">
+    <tr *ngIf="!providers">
       <td>
         <div class="loading"><div class="spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
       </td>
     </tr>
-    <tr *ngIf="providers !== null && !providers.length">
+    <tr *ngIf="providers && !providers.length">
       <td>
         <div class="alert alert-warning alert--icon-top alert--icon-top-small">
           <i class="material-icons">error</i>
