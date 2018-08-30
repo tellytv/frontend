@@ -29,7 +29,7 @@
             <tr class="table-row--draggable" *ngFor="let channel of lineup.Channels">
               <!-- {{ channel | json }} -->
               <td class="table__id align-middle"><i class="material-icons">drag_indicator</i>{{ channel.ChannelNumber | number: '3.0-0' }}</td>
-              <td *ngIf="channel.VideoTrack && channel.VideoTrack.Logo" class="table__image align-middle"><img src="{{channel.VideoTrack.Logo}}" /></td>
+              <td *ngIf="channel.GuideChannel && channel.GuideChannel.Data && channel.GuideChannel.Logos && channel.GuideChannel.Data.Logos[0] && channel.GuideChannel.Data.Logos[0].URL" class="table__image align-middle"><img src="{{channel.GuideChannel.Data.Logos[0].URL}}" /></td>
               <td *ngIf="!channel.VideoTrack || channel.VideoTrack && !channel.VideoTrack.Logo" class="table__image align-middle">
                 <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
                     <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
