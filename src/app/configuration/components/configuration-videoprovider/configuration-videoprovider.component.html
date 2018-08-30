@@ -1,14 +1,21 @@
-<h4>Video Providers</h4>
-<ul class="list-group chlist">
-  <li *ngFor="let provider of providers" class="list-group-item">
-    <span class="chlist__channel-number">{{ provider.ID }}</span>
-    <span class="chlist__channel-name">{{ provider.Name }}</span>
-    <span class="chlist__channel-actions">
-      <a class="chlist__channel-action pointer" (click)="editingChannel = channel"><i class="material-icons">edit</i></a>
-      <a class="chlist__channel-action chlist__channel-action--delete pointer" (click)="removeProvider(channel)"><i class="material-icons">delete_forever</i></a>
-    </span>
-  </li>
-</ul>
+<div class="table-header">
+  <h6 class="table-header__heading"><i class="material-icons table-header__icon">live_tv</i>Video Providers</h6>
+  <p class="table-header__body">Video providers are used by Telly to build a channel lineup to be served to Plex. Multiple providers can be added and used to create one or more lineups.</p>
+</div>
+<table class="table chlist">
+  <tbody>
+    <tr *ngFor="let provider of providers">
+      <td class="table__id align-middle"><label class="table__field-label table__field-label--small">ID:</label>{{ provider.ID | number: '2.0' }}</td>
+      <td class="table__name align-middle">{{ provider.Name }}</td>
+      <td class="table__actions align-middle">
+        <a class="table__action pointer" (click)="editingProvider = provider"><i class="material-icons">edit</i></a>
+        <a class="table__action table__action--delete pointer" (click)="removeProvider(channel)"><i class="material-icons">delete_forever</i></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
 <button class="btn btn-secondary mt-2 float-right"
 (click)="addProvider()">Add Video Provider <i class="material-icons">library_add</i></button>
 
