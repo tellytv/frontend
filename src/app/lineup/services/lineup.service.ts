@@ -55,4 +55,8 @@ export class LineupService {
   updateLineupChannels(lineupID: number, channels: LineupChannel[]): Observable<Lineup> {
     return this.http.put<Lineup>(`${this.url}/${lineupID}/channels`, channels);
   }
+
+  refreshLineup(lineupID: number): Observable<object> {
+    return this.http.put(`${this.url}/${lineupID}/refresh`, null);
+  }
 }

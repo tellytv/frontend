@@ -17,6 +17,7 @@
 
             <td class="table__name align-middle">{{ lineup.Name }}</td>
             <td class="table__actions align-middle">
+              <a class="table__action pointer" (click)="refreshLineup(lineup.ID)"><i class="material-icons">refresh</i></a>
               <a class="table__action pointer" routerLink="/lineup/manage/{{ lineup.ID }}"><i class="material-icons">view_list</i></a>
               <a class="table__action pointer" (click)="void"><i class="material-icons">edit</i></a>
               <a class="table__action table__action--delete pointer" (click)="void"><i class="material-icons">delete_forever</i></a>

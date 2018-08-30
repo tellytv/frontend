@@ -36,4 +36,8 @@ export class LineupManagerOverviewComponent implements OnInit {
       this.router.navigate(['/lineup/manage/', newLineup.ID]);
     });
   }
+
+  refreshLineup(lineupID: number): void {
+    this.lineupService.refreshLineup(lineupID).subscribe();
+  }
 }
