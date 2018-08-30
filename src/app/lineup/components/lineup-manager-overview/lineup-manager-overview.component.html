@@ -8,7 +8,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <button class="btn btn-add mb-4" (click)="addLineup()">Add New Lineup <i class="material-icons">add_to_queue</i></button>
+      <button class="btn btn-add mb-4 float-right" (click)="addLineup()">Add New Lineup <i class="material-icons">add_to_queue</i></button>
       <div class="alert alert-warning alert--icon-top alert--icon-top-large" *ngIf="!(lineups$ | async)">
         <i class="material-icons">warning</i>
         <span class="alert__text">Whoops! Looks like you haven't created any lineups yet. Head over to the <a routerLink="/lineup/manage" title="Manage">manage</a> page to create one now. If you haven't already, be sure that you have at least one video provider <a routerLink="/config" title="Configuration">configured</a>.</span>
