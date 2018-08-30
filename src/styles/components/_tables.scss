@@ -60,6 +60,25 @@
   }
 }
 
+.table__name--mono {
+  font-family: $fonts--sharetech;
+}
+
+.table__affliate {
+  color: $colors--orange;
+  position: relative;
+  &:before {
+    content: 'arrow_forward';
+    color: #4ecd85;
+    display: block;
+    font-family: 'Material Icons';
+    position: absolute;
+    top: 11px;
+    left: -20px;
+  }
+}
+
+
 .table__image {
   width: 8%;
   font-family: $fonts--sharetech;
@@ -76,7 +95,7 @@
   }
 
   img {
-    height: 30px;
+    height: 45px;
   }
 
   svg {
