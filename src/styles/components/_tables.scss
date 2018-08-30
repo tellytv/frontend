@@ -53,7 +53,6 @@
 }
 
 .table__name {
-  width: 100%;
   padding-top: 12px !important;
 
   .badge {
@@ -61,8 +60,27 @@
   }
 }
 
+.table__name--mono {
+  font-family: $fonts--sharetech;
+}
+
+.table__affliate {
+  color: $colors--orange;
+  position: relative;
+  &:before {
+    content: 'arrow_forward';
+    color: #4ecd85;
+    display: block;
+    font-family: 'Material Icons';
+    position: absolute;
+    top: 11px;
+    left: -20px;
+  }
+}
+
+
 .table__image {
-  width: 10%;
+  width: 8%;
   font-family: $fonts--sharetech;
   font-size: 10px;
   padding-left: 20px !important;
@@ -77,7 +95,7 @@
   }
 
   img {
-    height: 75px;
+    height: 45px;
   }
 
   svg {
@@ -160,6 +178,7 @@
 }
 
 .table__wrap {
+  width: 100%;
   background: $colors--offwhite-1;
   border-radius: 2px;
   padding: 10px;
@@ -198,9 +217,9 @@
 .table-row--draggable {
   cursor: grab;
 
-  .table__image {
-    width: 15%;
-  }
+  // .table__image {
+  //   width: 15%;
+  // }
 
   td {
     transition: background 0.5s ease, box-shadow 0.25s ease 0.15s, color 0.5s ease;

@@ -6,22 +6,24 @@
 </div>
 
 <div class="container">
-  <table class="table">
-   <thead>
-    <tr>
-      <th scope="col">Number</th>
-      <th scope="col">Name</th>
-      <th scope="col">Call Sign</th>
-      <th scope="col">Affilate</th>
-    </tr>
-   </thead>
-   <tbody>
-    <tr *ngFor="let channel of (channels$ | async)">
-      <td>{{ channel.Number }}</td>
-      <td>{{ channel.Name }}</td>
-      <td>{{ channel.CallSign }}</td>
-      <td>{{ channel.Affiliate }}</td>
-    </tr>
-   </tbody>
-  </table>
+  <div class="table__wrap">
+    <table class="table">
+     <thead>
+      <tr>
+        <th scope="col">CH No.</th>
+        <th scope="col">CH Name</th>
+        <th scope="col">Call Sign</th>
+        <th scope="col">Affilate</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr *ngFor="let channel of (channels$ | async)">
+        <td class="table__id">{{ channel.Number }}</td>
+        <td class="table__name">{{ channel.Name }}</td>
+        <td class="table__name table__name--mono">{{ channel.CallSign }}</td>
+        <td class="table__name table__name--mono " [ngClass]="{ table__affliate: channel.Affiliate }">{{ channel.Affiliate }}</td>
+      </tr>
+     </tbody>
+    </table>
+  </div>
 </div>

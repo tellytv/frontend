@@ -6,6 +6,13 @@
 </div>
 
 <div class="container">
+
+  <div class="alert alert-warning alert--icon-top alert--icon-top-large" *ngIf="!(lineups$ | async)">
+    <i class="material-icons">warning</i>
+    <span class="alert__text">Whoops! Looks like you haven't created any lineups yet. Head over to the <a routerLink="/lineup/manage" title="Manage">manage</a> page to create one now. If you haven't already, be sure that you have at least one video provider <a routerLink="/config" title="Configuration">configured</a>.</span>
+    <div class="alert__button"><button class="btn btn-lg btn-primary" routerLink="/lineup/manage">Manage Lineups</button></div>
+  </div>
+
   <div *ngFor="let lineup of (lineups$ | async)" class="row mb-4">
 
     <p *ngIf="!lineup.Channels || lineup.Channels.length === 0" class="col-12 pl-0">
@@ -13,7 +20,7 @@
     </p>
     <div class="table__wrap">
       <h4 class="page-heading page-heading__no-transform"><i class="material-icons mr-2">view_list</i> {{ lineup.Name }}</h4>
-      <table class="table chlist">
+      <table class="table">
         <thead>
           <tr>
             <th scope="col">CH. No</th>
