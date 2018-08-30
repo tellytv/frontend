@@ -4,6 +4,19 @@
 </div>
 <table class="table chlist">
   <tbody>
+    <tr *ngIf="providers === null">
+      <td>
+        <div class="loading"><div class="spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
+      </td>
+    </tr>
+    <tr *ngIf="providers !== null && !providers.length">
+      <td>
+        <div class="alert alert-warning alert--icon-top alert--icon-top-small">
+          <i class="material-icons">error</i>
+          <span class="alert__text">In order to build a custom XMLTV episode guide you will need to add at least one guide provider. Guide providers ensure you'll get the richest guide data possible.</span>
+        </div>
+      </td>
+    </tr>
     <tr *ngFor="let provider of providers">
       <td class="table__id align-middle"><label class="table__field-label table__field-label--small">ID:</label>{{ provider.ID | number: '2.0' }}</td>
       <td class="table__name align-middle">{{ provider.Name }}</td>
@@ -16,7 +29,7 @@
   </tbody>
 </table>
 
-<button class="btn btn-secondary mt-2 float-right"
+<button class="btn btn-add mt-2 float-right"
 (click)="addProvider()">Add Guide Provider <i class="material-icons">library_add</i></button>
 
 <app-edit-guideprovider-modal
