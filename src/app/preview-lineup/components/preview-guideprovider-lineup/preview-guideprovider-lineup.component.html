@@ -1,0 +1,27 @@
+<div class="heading">
+  <div class="container">
+    <h1 class="page-heading">Lineup Preview</h1>
+    <p class="heading__sub"></p>
+  </div>
+</div>
+
+<div class="container">
+  <table class="table">
+   <thead>
+    <tr>
+      <th scope="col">Number</th>
+      <th scope="col">Name</th>
+      <th scope="col">Call Sign</th>
+      <th scope="col">Affilate</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr *ngFor="let channel of (channels$ | async)">
+      <td>{{ channel.Number }}</td>
+      <td>{{ channel.Name }}</td>
+      <td>{{ channel.CallSign }}</td>
+      <td>{{ channel.Affiliate }}</td>
+    </tr>
+   </tbody>
+  </table>
+</div>
