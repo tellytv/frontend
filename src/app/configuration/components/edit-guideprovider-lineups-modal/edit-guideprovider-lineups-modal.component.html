@@ -16,7 +16,7 @@
         <div class="form-group">
           <label for="region">Region</label>
           <ng-select id="region" [items]="coverageAreas$ | async" bindLabel="FullName" bindValue="ShortName" groupBy="RegionName" name="region"
-            (change)="regionChanged($event)"></ng-select>
+            (change)="regionChanged($event)" [(ngModel)]="selectedRegionName"></ng-select>
         </div>
         <div *ngIf="selectedRegion$ && !selectedRegion$.OnePostalCode" class="form-group">
           <label for="postalCode">Postal Code</label>
@@ -26,7 +26,8 @@
         <div *ngIf="lineupCandidates$" class="form-group">
           <label for="lineup">Available Lineups</label>
           <span>
-            <ng-select id="lineup" [items]="lineupCandidates$ | async" bindLabel="Name" bindValue="ProviderID" name="lineup" [ngModel]="selectedLineupID$">
+            <ng-select id="lineup" [items]="lineupCandidates$ | async" bindLabel="Name" bindValue="ProviderID" name="lineup" [(ngModel)]="selectedLineupID$"
+              (change)="lineupChanged($event)">
               <ng-template ng-label-tmp ng-option-tmp let-item="item">
                 {{ item.Name }} - {{ item.Location }} - {{ item.Transport }} (<code>{{ item.ProviderID }}</code>)
               </ng-template>

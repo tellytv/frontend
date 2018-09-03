@@ -14,7 +14,9 @@ export class EditGuideProviderLineupsModalComponent {
   coverageAreas$: Observable<GuideProviderCoverageArea[]>;
   lineupCandidates$: Observable<GuideProviderAvailableLineup[]>;
   selectedRegion$: GuideProviderCoverageArea;
+  selectedRegionName: string;
   selectedLineupID$: string;
+  selectedLineup$: GuideProviderAvailableLineup;
   postalCode: string;
 
   @Input()
@@ -32,7 +34,7 @@ export class EditGuideProviderLineupsModalComponent {
 
   regionChanged($event: GuideProviderCoverageArea): void {
     this.selectedRegion$ = $event;
-    if (this.selectedRegion$.OnePostalCode === false) {
+    if (this.selectedRegion$ && this.selectedRegion$.OnePostalCode === false) {
       this.lineupCandidates$ = this.configService.getGuideProviderLineups(this.guideProvider.ID, this.selectedRegion$.ShortName,
                                                                           this.selectedRegion$.PostalCode);
     }
@@ -43,12 +45,20 @@ export class EditGuideProviderLineupsModalComponent {
                                                                         this.postalCode);
   }
 
+  lineupChanged($event: GuideProviderAvailableLineup): void {
+    this.selectedLineup$ = $event;
+  }
+
   addLineup(): void {
-    this.configService.addGuideProviderLineup(this.guideProvider.ID, this.selectedLineupID$);
-    this.coverageAreas$ = undefined;
-    this.lineupCandidates$ = undefined;
-    this.selectedLineupID$ = undefined;
-    this.selectedRegion$ = undefined;
-    this.postalCode = undefined;
+    this.configService.addGuideProviderLineup(this.guideProvider.ID, this.selectedLineupID$).subscribe((provider: GuideProviderAvailableLineup) => {
+      this.guideProvider.ProviderData.lineups.push({name: this.selectedLineup$.Name, lineup: this.selectedLineup$.ProviderID});
+      this.coverageAreas$ = undefined;
+      this.lineupCandidates$ = undefined;
+      this.selectedLineupID$ = undefined;
+      this.selectedRegion$ = undefined;
+      this.postalCode = undefined;
+      this.selectedLineup$ = undefined;
+      this.selectedRegionName = undefined;
+    });
   }
 }

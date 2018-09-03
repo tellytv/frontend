@@ -31,6 +31,7 @@ export class ConfigurationGuideproviderComponent {
   }
 
   closeModal(): void {
+    delete this.editingProviderLineups;
     delete this.editingProvider;
     this.addingProvider = false;
   }
