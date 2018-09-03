@@ -13,10 +13,10 @@ export class EditGuideProviderLineupsModalComponent {
   guideProvider: GuideSource;
   coverageAreas$: Observable<GuideProviderCoverageArea[]>;
   lineupCandidates$: Observable<GuideProviderAvailableLineup[]>;
-  selectedRegion$: GuideProviderCoverageArea;
+  selectedRegion: GuideProviderCoverageArea;
   selectedRegionName: string;
-  selectedLineupID$: string;
-  selectedLineup$: GuideProviderAvailableLineup;
+  selectedLineupID: string;
+  selectedLineup: GuideProviderAvailableLineup;
   postalCode: string;
 
   @Input()
@@ -33,32 +33,32 @@ export class EditGuideProviderLineupsModalComponent {
   @Output() close = new EventEmitter<GuideSource>();
 
   regionChanged($event: GuideProviderCoverageArea): void {
-    this.selectedRegion$ = $event;
-    if (this.selectedRegion$ && this.selectedRegion$.OnePostalCode === false) {
-      this.lineupCandidates$ = this.configService.getGuideProviderLineups(this.guideProvider.ID, this.selectedRegion$.ShortName,
-                                                                          this.selectedRegion$.PostalCode);
+    this.selectedRegion = $event;
+    if (this.selectedRegion && this.selectedRegion.OnePostalCode === false) {
+      this.lineupCandidates$ = this.configService.getGuideProviderLineups(this.guideProvider.ID, this.selectedRegion.ShortName,
+                                                                          this.selectedRegion.PostalCode);
     }
   }
 
   postalCodeChanged(): void {
-    this.lineupCandidates$ = this.configService.getGuideProviderLineups(this.guideProvider.ID, this.selectedRegion$.ShortName,
+    this.lineupCandidates$ = this.configService.getGuideProviderLineups(this.guideProvider.ID, this.selectedRegion.ShortName,
                                                                         this.postalCode);
   }
 
   lineupChanged($event: GuideProviderAvailableLineup): void {
-    this.selectedLineup$ = $event;
+    this.selectedLineup = $event;
   }
 
   addLineup(): void {
     this.configService.addGuideProviderLineup(this.guideProvider.ID,
-                                              this.selectedLineupID$).subscribe((provider: GuideProviderAvailableLineup) => {
-      this.guideProvider.ProviderData.lineups.push({name: this.selectedLineup$.Name, lineup: this.selectedLineup$.ProviderID});
+                                              this.selectedLineupID).subscribe((provider: GuideProviderAvailableLineup) => {
+      this.guideProvider.ProviderData.lineups.push({name: this.selectedLineup.Name, lineup: this.selectedLineup.ProviderID});
       this.coverageAreas$ = undefined;
       this.lineupCandidates$ = undefined;
-      this.selectedLineupID$ = undefined;
-      this.selectedRegion$ = undefined;
+      this.selectedLineupID = undefined;
+      this.selectedRegion = undefined;
       this.postalCode = undefined;
-      this.selectedLineup$ = undefined;
+      this.selectedLineup = undefined;
       this.selectedRegionName = undefined;
     });
   }

@@ -9,7 +9,7 @@ import { EditGuideproviderModalComponent } from './components/edit-guideprovider
 import {
   EditGuideProviderLineupsModalComponent
 } from './components/edit-guideprovider-lineups-modal/edit-guideprovider-lineups-modal.component';
-import { KeysPipe } from 'angular-pipes';
+
 @NgModule({
   imports: [
     CommonModule,
