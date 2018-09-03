@@ -14,14 +14,12 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Checking your new changes
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Running `npm run lint` will check your code for errors (only *.ts files) and inform you of any mistakes.
 
-## Running end-to-end tests
+## Some guidelines (WIP)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* Append a dollar sign to the end of Async variables `asyncVariable$: Observable<SomeInterface>`
+* Interfaces should be used for models only, not classes.
+* When in doubt about something, just ask!
