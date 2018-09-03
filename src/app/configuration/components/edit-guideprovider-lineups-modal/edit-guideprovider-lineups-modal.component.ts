@@ -50,7 +50,8 @@ export class EditGuideProviderLineupsModalComponent {
   }
 
   addLineup(): void {
-    this.configService.addGuideProviderLineup(this.guideProvider.ID, this.selectedLineupID$).subscribe((provider: GuideProviderAvailableLineup) => {
+    this.configService.addGuideProviderLineup(this.guideProvider.ID,
+                                              this.selectedLineupID$).subscribe((provider: GuideProviderAvailableLineup) => {
       this.guideProvider.ProviderData.lineups.push({name: this.selectedLineup$.Name, lineup: this.selectedLineup$.ProviderID});
       this.coverageAreas$ = undefined;
       this.lineupCandidates$ = undefined;
