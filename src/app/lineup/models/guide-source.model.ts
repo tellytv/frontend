@@ -9,5 +9,5 @@ export interface GuideSource {
   URL: string;
   ImportedAt: Date;
   Channels: GuideSourceChannel[];
-  ProviderData: object;
+  ProviderData: any;
 }
