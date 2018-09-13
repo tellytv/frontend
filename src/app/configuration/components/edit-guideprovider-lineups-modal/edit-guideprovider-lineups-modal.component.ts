@@ -27,10 +27,9 @@ export class EditGuideProviderLineupsModalComponent {
     }
   }
 
-  constructor(private configService: ConfigurationService) { }
+  @Output() close = new EventEmitter();
 
-  @Output() save = new EventEmitter<GuideSource>();
-  @Output() close = new EventEmitter<GuideSource>();
+  constructor(private configService: ConfigurationService) { }
 
   regionChanged($event: GuideProviderCoverageArea): void {
     this.selectedRegion = $event;
@@ -61,5 +60,11 @@ export class EditGuideProviderLineupsModalComponent {
       this.selectedLineup = undefined;
       this.selectedRegionName = undefined;
     });
+  }
+
+  closeLineupsModal(): void {
+    console.log('CLOSE', this.guideProvider);
+    console.log('this.close', this.close)
+    this.close.emit(null);
   }
 }

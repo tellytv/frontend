@@ -23,11 +23,11 @@
           </div>
           <div *ngIf="provider.Provider == 'SchedulesDirect'" class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Only for SD" [(ngModel)]="provider.Username">
+            <input type="text" class="form-control" id="username" name="username" autocomplete="username" placeholder="Only for SD" [(ngModel)]="provider.Username">
           </div>
           <div *ngIf="provider.Provider == 'SchedulesDirect'" class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Only for SD" [(ngModel)]="provider.Password">
+            <input type="password" class="form-control" id="password" name="password" autocomplete="current-password" placeholder="Only for SD" [(ngModel)]="provider.Password">
           </div>
           <div *ngIf="provider.Provider == 'XMLTV'" class="form-group">
             <label for="XMLTV_URL">Path to or URL of XMLTV file</label>

@@ -12,6 +12,7 @@ export class ConfigurationGuideproviderComponent {
   @Input() providers: GuideSource[];
 
   addingProvider = false;
+  editLineups = false;
   editingProvider: GuideSource | CreateGuideProvider;
   editingProviderLineups: GuideSource;
 
@@ -34,10 +35,6 @@ export class ConfigurationGuideproviderComponent {
     delete this.editingProviderLineups;
     delete this.editingProvider;
     this.addingProvider = false;
-  }
-
-  closeLineupsModal(): void {
-    delete this.editingProviderLineups;
   }
 
   createProvider(): void {

@@ -18,15 +18,15 @@
           <ng-select id="region" [items]="coverageAreas$ | async" bindLabel="FullName" bindValue="ShortName" groupBy="RegionName" name="region"
             (change)="regionChanged($event)" [(ngModel)]="selectedRegionName"></ng-select>
         </div>
-        <div *ngIf="selectedRegion$ && !selectedRegion$.OnePostalCode" class="form-group">
+        <div *ngIf="selectedRegion && !selectedRegion.OnePostalCode" class="form-group">
           <label for="postalCode">Postal Code</label>
-          <input type="text" class="form-control" id="postalCode" name="postalCode" [pattern]="selectedRegion$.PostalCode" [placeholder]="selectedRegion$.PostalCodeExample"
+          <input type="text" class="form-control" id="postalCode" name="postalCode" [pattern]="selectedRegion.PostalCode" [placeholder]="selectedRegion.PostalCodeExample"
             [(ngModel)]="postalCode" (change)="postalCodeChanged()">
         </div>
         <div *ngIf="lineupCandidates$" class="form-group">
           <label for="lineup">Available Lineups</label>
           <span>
-            <ng-select id="lineup" [items]="lineupCandidates$ | async" bindLabel="Name" bindValue="ProviderID" name="lineup" [(ngModel)]="selectedLineupID$"
+            <ng-select id="lineup" [items]="lineupCandidates$ | async" bindLabel="Name" bindValue="ProviderID" name="lineup" [(ngModel)]="selectedLineupID"
               (change)="lineupChanged($event)">
               <ng-template ng-label-tmp ng-option-tmp let-item="item">
                 {{ item.Name }} - {{ item.Location }} - {{ item.Transport }} (<code>{{ item.ProviderID }}</code>)
@@ -38,7 +38,7 @@
         <button *ngIf="lineupCandidates$" type="button" class="btn btn-primary" (click)="addLineup()">Add Lineup</button>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="this.close.emit()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="closeLineupsModal()">Close</button>
       </div>
     </div>
   </div>
