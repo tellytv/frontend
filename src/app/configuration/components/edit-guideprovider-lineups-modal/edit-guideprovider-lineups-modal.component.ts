@@ -63,8 +63,6 @@ export class EditGuideProviderLineupsModalComponent {
   }
 
   closeLineupsModal(): void {
-    console.log('CLOSE', this.guideProvider);
-    console.log('this.close', this.close)
     this.close.emit(null);
   }
 }
