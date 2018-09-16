@@ -25,7 +25,7 @@
           <div class="form-group">
             <label for="videoTrack">Video Track</label>
             <ng-select [items]="videoTracks" bindLabel="Name" bindValue="ID" [groupBy]="videoTrackGroupBy" name="videoTrack" [(ngModel)]="channel.VideoTrackID"
-              [searchFn]="searchVideoTracks" [virtualScroll]="true">
+              [searchFn]="searchVideoTracks" [virtualScroll]="true" (change)="handleSelectVideoTrack($event)">
               <ng-template ng-label-tmp let-item="item">
                 {{ item.VideoSourceName }} -> {{ item.Name }} <code *ngIf="item.EPGID">({{ item.EPGID }})</code>
               </ng-template>

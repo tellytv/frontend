@@ -31,6 +31,16 @@ export class ChannelEditModalComponent {
     return (item.GuideSourceName + item.Data.Name + ' ' + item.XMLTVID).toLowerCase().includes(search.toLowerCase());
   }
 
+  handleSelectVideoTrack(event: VideoSourceTrack): void {
+    if (!this.channel.Title || this.channel.Title !== '') {
+      this.channel.Title = event.Name;
+    }
+
+    if (event.Name.indexOf('HD') !== -1) {
+      this.channel.HD = true;
+    }
+  }
+
   addChannel(): void {
     this.save.emit();
   }
