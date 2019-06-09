@@ -1,29 +1,28 @@
 import { Component, Input } from '@angular/core';
-import { VideoSource } from '@app/lineup/models';
+import { ICreateVideoProvider, VideoProvider } from '@app/configuration/models';
 import { ConfigurationService } from '@app/configuration/services/configuration.service';
-import { CreateVideoProvider, VideoProvider } from '@app/configuration/models';
+import { IVideoSource } from '@app/lineup/models';
 
 @Component({
   selector: 'app-configuration-videoprovider',
   templateUrl: './configuration-videoprovider.component.html',
-  styleUrls: ['./configuration-videoprovider.component.scss']
+  styleUrls: ['./configuration-videoprovider.component.scss'],
 })
-export class ConfigurationVideoproviderComponent {
-  @Input() providers: VideoSource[];
+export class ConfigurationVideoProviderComponent {
+  @Input() providers: IVideoSource[];
 
   addingProvider = false;
-  editingProvider: VideoSource | CreateVideoProvider;
+  editingProvider: IVideoSource | ICreateVideoProvider;
 
   constructor(private configService: ConfigurationService) {
   }
 
-
   addProvider(): void {
     this.addingProvider = true;
-    this.editingProvider = <CreateVideoProvider>{
+    this.editingProvider = {
       Name: '',
-      Provider: VideoProvider.Xtream
-    };
+      Provider: VideoProvider.Xtream,
+    } as ICreateVideoProvider;
   }
 
   closeModal(): void {
@@ -32,7 +31,7 @@ export class ConfigurationVideoproviderComponent {
   }
 
   createProvider(): void {
-    this.configService.createVideoProvider(<CreateVideoProvider>this.editingProvider).subscribe((provider: VideoSource) => {
+    this.configService.createVideoProvider(this.editingProvider as ICreateVideoProvider).subscribe((provider: IVideoSource) => {
       this.providers.push(provider);
     });
     this.closeModal();

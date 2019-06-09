@@ -1,17 +1,17 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { VideoProvider, CreateVideoProvider } from '@app/configuration/models';
-import { VideoSource } from '@app/lineup/models';
+import { ICreateVideoProvider } from '@app/configuration/models';
+import { IVideoSource } from '@app/lineup/models';
 
 @Component({
   selector: 'app-edit-videoprovider-modal',
   templateUrl: './edit-videoprovider-modal.component.html',
-  styleUrls: ['./edit-videoprovider-modal.component.scss']
+  styleUrls: ['./edit-videoprovider-modal.component.scss'],
 })
-export class EditVideoproviderModalComponent {
+export class EditVideoProviderModalComponent {
   @Input() newProvider: boolean;
-  @Input() provider: VideoSource | CreateVideoProvider;
+  @Input() provider: IVideoSource | ICreateVideoProvider;
 
-  @Output() save = new EventEmitter<VideoSource>();
-  @Output() create = new EventEmitter<CreateVideoProvider>();
-  @Output() close = new EventEmitter<VideoSource | CreateVideoProvider>();
+  @Output() save = new EventEmitter<IVideoSource>();
+  @Output() create = new EventEmitter<ICreateVideoProvider>();
+  @Output() close = new EventEmitter<IVideoSource | ICreateVideoProvider>();
 }

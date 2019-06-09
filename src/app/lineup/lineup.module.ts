@@ -1,16 +1,16 @@
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-import { NgPipesModule } from 'angular-pipes';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgPipesModule } from 'angular-pipes';
 import { DragulaModule } from 'ng2-dragula';
 
-import { LineupManagerComponent,
-  ChannelEditModalComponent,
+import { ChannelEditModalComponent,
   LineupEditModalComponent,
+  LineupManagerComponent,
   LineupManagerOverviewComponent,
   LineupOverviewComponent } from './components';
 
@@ -23,14 +23,14 @@ import { LineupManagerComponent,
     FormsModule,
     CommonModule,
     DragulaModule.forRoot(),
-    BrowserModule
+    BrowserModule,
   ],
   declarations: [
     LineupOverviewComponent,
     LineupManagerComponent,
     LineupEditModalComponent,
     LineupManagerOverviewComponent,
-    ChannelEditModalComponent
-  ]
+    ChannelEditModalComponent,
+  ],
 })
 export class LineupModule { }

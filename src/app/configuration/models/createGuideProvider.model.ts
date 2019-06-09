@@ -1,4 +1,4 @@
-export interface CreateGuideProvider {
+export interface ICreateGuideProvider {
   Name: string;
   Provider: GuideProvider;
 
@@ -12,5 +12,5 @@ export interface CreateGuideProvider {
 
 export enum GuideProvider {
   SchedulesDirect = 'SchedulesDirect',
-  XMLTV = 'XMLTV'
+  XMLTV = 'XMLTV',
 }

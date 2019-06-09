@@ -1,6 +1,6 @@
-import { VideoSourceTrack } from '@app/lineup/models/video-source-track.model';
+import { IVideoSourceTrack } from '@app/lineup/models/video-source-track.model';
 
-export interface VideoSource {
+export interface IVideoSource {
   ID: number;
   Name: string;
   Provider: string;
@@ -9,5 +9,5 @@ export interface VideoSource {
   M3UURL: string;
   MaxStreams: number;
   ImportedAt: Date;
-  Tracks: VideoSourceTrack[];
+  Tracks: IVideoSourceTrack[];
 }

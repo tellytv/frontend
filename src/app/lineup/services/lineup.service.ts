@@ -1,59 +1,58 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
+import { ICreateLineup, ILineup, ILineupChannel } from '@app/lineup/models';
 import { environment } from '@environment';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CreateLineup, Lineup, LineupChannel } from '@app/lineup/models';
-
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LineupService {
   url = `${environment.url}/api/lineups`;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
-  createLineup(lineup: CreateLineup): Observable<Lineup> {
-    return this.http.post<Lineup>(`${this.url}`, lineup);
+  createLineup(lineup: ICreateLineup): Observable<ILineup> {
+    return this.http.post<ILineup>(`${this.url}`, lineup);
   }
 
-  getLineup(lineupID: number): Observable<Lineup> {
-    return this.http.get<Lineup>(`${this.url}/${lineupID}`).pipe(
-      map((lineup: Lineup) => {
-        lineup.Channels.sort((a: LineupChannel, b: LineupChannel) => {
+  getLineup(lineupID: number): Observable<ILineup> {
+    return this.http.get<ILineup>(`${this.url}/${lineupID}`).pipe(
+      map((lineup: ILineup) => {
+        lineup.Channels.sort((a: ILineupChannel, b: ILineupChannel) => {
           return parseInt(a.ChannelNumber, 10) < parseInt(b.ChannelNumber, 10) ? -1 : 1;
         });
         return lineup;
-      })
+      }),
     );
   }
 
-  getLineupChannels(lineupID: number): Observable<LineupChannel[]> {
-    return this.http.get<LineupChannel[]>(`${this.url}/${lineupID}/channels`);
+  getLineupChannels(lineupID: number): Observable<ILineupChannel[]> {
+    return this.http.get<ILineupChannel[]>(`${this.url}/${lineupID}/channels`);
   }
 
-  getLineups(): Observable<Lineup[]> {
-    return this.http.get<Lineup[]>(this.url).pipe(
-      map((lineups: Lineup[]) => {
+  getLineups(): Observable<ILineup[]> {
+    return this.http.get<ILineup[]>(this.url).pipe(
+      map((lineups: ILineup[]) => {
         for (const lineup of lineups) {
           if (!lineup.Channels) {
             continue;
           }
-          lineup.Channels.sort((a: LineupChannel, b: LineupChannel) => {
+          lineup.Channels.sort((a: ILineupChannel, b: ILineupChannel) => {
             return parseInt(a.ChannelNumber, 10) < parseInt(b.ChannelNumber, 10) ? -1 : 1;
           });
         }
         return lineups;
-      })
+      }),
     );
   }
 
-  updateLineupChannels(lineupID: number, channels: LineupChannel[]): Observable<Lineup> {
-    return this.http.put<Lineup>(`${this.url}/${lineupID}/channels`, channels);
+  updateLineupChannels(lineupID: number, channels: ILineupChannel[]): Observable<ILineup> {
+    return this.http.put<ILineup>(`${this.url}/${lineupID}/channels`, channels);
   }
 
   refreshLineup(lineupID: number): Observable<object> {

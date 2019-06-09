@@ -1,26 +1,26 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IGuideProviderAvailableLineup, IGuideProviderCoverageArea } from '@app/configuration/models';
 import { ConfigurationService } from '@app/configuration/services/configuration.service';
-import { GuideSource } from '@app/lineup/models';
-import { GuideProviderCoverageArea, GuideProviderAvailableLineup } from '@app/configuration/models';
+import { IGuideSource } from '@app/lineup/models';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-guideprovider-lineups-modal',
   templateUrl: './edit-guideprovider-lineups-modal.component.html',
-  styleUrls: ['./edit-guideprovider-lineups-modal.component.scss']
+  styleUrls: ['./edit-guideprovider-lineups-modal.component.scss'],
 })
 export class EditGuideProviderLineupsModalComponent {
-  guideProvider: GuideSource;
-  coverageAreas$: Observable<GuideProviderCoverageArea[]>;
-  lineupCandidates$: Observable<GuideProviderAvailableLineup[]>;
-  selectedRegion: GuideProviderCoverageArea;
+  guideProvider: IGuideSource;
+  coverageAreas$: Observable<IGuideProviderCoverageArea[]>;
+  lineupCandidates$: Observable<IGuideProviderAvailableLineup[]>;
+  selectedRegion: IGuideProviderCoverageArea;
   selectedRegionName: string;
   selectedLineupID: string;
-  selectedLineup: GuideProviderAvailableLineup;
+  selectedLineup: IGuideProviderAvailableLineup;
   postalCode: string;
 
   @Input()
-  set provider(provider: GuideSource) {
+  set provider(provider: IGuideSource) {
     if (provider) {
       this.guideProvider = provider;
       this.coverageAreas$ = this.configService.getGuideProviderCoverage(provider.ID);
@@ -31,7 +31,7 @@ export class EditGuideProviderLineupsModalComponent {
 
   constructor(private configService: ConfigurationService) { }
 
-  regionChanged($event: GuideProviderCoverageArea): void {
+  regionChanged($event: IGuideProviderCoverageArea): void {
     this.selectedRegion = $event;
     if (this.selectedRegion && this.selectedRegion.OnePostalCode === false) {
       this.lineupCandidates$ = this.configService.getGuideProviderLineups(this.guideProvider.ID, this.selectedRegion.ShortName,
@@ -44,13 +44,13 @@ export class EditGuideProviderLineupsModalComponent {
                                                                         this.postalCode);
   }
 
-  lineupChanged($event: GuideProviderAvailableLineup): void {
+  lineupChanged($event: IGuideProviderAvailableLineup): void {
     this.selectedLineup = $event;
   }
 
   addLineup(): void {
     this.configService.addGuideProviderLineup(this.guideProvider.ID,
-                                              this.selectedLineupID).subscribe((provider: GuideProviderAvailableLineup) => {
+                                              this.selectedLineupID).subscribe((provider: IGuideProviderAvailableLineup) => {
       this.guideProvider.ProviderData.lineups.push({name: this.selectedLineup.Name, lineup: this.selectedLineup.ProviderID});
       this.coverageAreas$ = undefined;
       this.lineupCandidates$ = undefined;

@@ -1,37 +1,37 @@
-export interface XMLTVProgramme {
-  titles?: (XMLTVCommonElement)[] | null;
-  secondaryTitles?: (XMLTVCommonElement)[] | null;
-  descriptions?: (XMLTVCommonElement)[] | null;
+export interface IXMLTVProgramme {
+  titles?: IXMLTVCommonElement[] | null;
+  secondaryTitles?: IXMLTVCommonElement[] | null;
+  descriptions?: IXMLTVCommonElement[] | null;
   date: string;
-  categories?: (XMLTVCommonElement)[] | null;
-  episodeNums?: (EpisodeNumsEntity)[] | null;
+  categories?: IXMLTVCommonElement[] | null;
+  episodeNums?: IEpisodeNumsEntity[] | null;
   start: string;
   stop: string;
   channel: string;
   new?: boolean | null;
-  icons?: (IconsEntity)[] | null;
+  icons?: IIconsEntity[] | null;
 }
 
-export interface XMLTVChannel {
-  displayNames?: (XMLTVCommonElement)[] | null;
-  icons?: (IconsEntity)[] | null;
-  urls?: (string)[] | null;
+export interface IXMLTVChannel {
+  displayNames?: IXMLTVCommonElement[] | null;
+  icons?: IIconsEntity[] | null;
+  urls?: string[] | null;
   id: string;
 
   Lineup?: string; // TODO: Check the naming
 }
 
-export interface XMLTVCommonElement {
+export interface IXMLTVCommonElement {
   lang: string;
   value: string;
 }
 
-export interface EpisodeNumsEntity {
+export interface IEpisodeNumsEntity {
   system: string;
   value: string;
 }
 
-export interface IconsEntity {
+export interface IIconsEntity {
   source: string;
   width?: number | null;
   height?: number | null;

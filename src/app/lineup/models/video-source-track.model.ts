@@ -1,4 +1,4 @@
-export interface VideoSourceTrack {
+export interface IVideoSourceTrack {
   ID: number;
   VideoSourceID: number;
   Name: string;
