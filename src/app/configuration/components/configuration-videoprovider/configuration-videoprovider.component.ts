@@ -33,13 +33,14 @@ export class ConfigurationVideoProviderComponent {
   createProvider(): void {
     this.configService.createVideoProvider(this.editingProvider as ICreateVideoProvider).subscribe((provider: IVideoSource) => {
       this.providers.push(provider);
+      this.closeModal();
     });
-    this.closeModal();
   }
 
   saveProvider(): void {
-    this.configService.saveVideoProvider(this.editingProvider as IVideoSource).subscribe();
-    this.closeModal();
+    this.configService.saveVideoProvider(this.editingProvider as IVideoSource).subscribe(() => {
+      this.closeModal();
+    });
   }
 
   removeProvider(provider: IVideoSource): void {
