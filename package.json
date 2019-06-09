@@ -8,8 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "precommit": "lint-staged",
-    "prepush": "npm run build"
+    "precommit": "lint-staged"
   },
   "lint-staged": {
     "*.ts": [
