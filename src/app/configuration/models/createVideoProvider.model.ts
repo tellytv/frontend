@@ -3,7 +3,7 @@ export interface ICreateVideoProvider {
   Provider: VideoProvider;
 
   // XTream
-  BaseUrl?: string;
+  BaseURL?: string;
   Username?: string;
   Password?: string;
 
