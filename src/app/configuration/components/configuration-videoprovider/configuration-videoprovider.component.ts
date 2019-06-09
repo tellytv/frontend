@@ -41,3 +41,11 @@ export class ConfigurationVideoProviderComponent {
     this.configService.saveVideoProvider(this.editingProvider as IVideoSource).subscribe();
     this.closeModal();
   }
+
+  removeProvider(provider: IVideoSource): void {
+    this.configService.deleteVideoProvider(provider).subscribe(() => {
+      const index = this.providers.findIndex((d: IVideoSource) => d.ID === provider.ID);
+      this.providers.splice(index, 1);
+    });
+  }
+}

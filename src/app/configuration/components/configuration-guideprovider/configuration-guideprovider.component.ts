@@ -43,4 +43,11 @@ export class ConfigurationGuideProviderComponent {
     });
     this.closeModal();
   }
+
+  removeProvider(provider: IGuideSource): void {
+    this.configService.deleteGuideProvider(provider).subscribe(() => {
+      const index = this.providers.findIndex((d: IGuideSource) => d.ID === provider.ID);
+      this.providers.splice(index, 1);
+    });
+  }
 }

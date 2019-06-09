@@ -36,6 +36,10 @@ export class ConfigurationService {
     return this.http.put<IGuideSource>(`${this.url}/guide_sources/${provider.ID}`, provider);
   }
 
+  deleteGuideProvider(provider: IGuideSource): Observable<{}> {
+    return this.http.delete(`${this.url}/guide_sources/${provider.ID}`);
+  }
+
   getGuideProviders(): Observable<IGuideSource[]> {
     return this.guideSourceService.getGuideSources();
   }
@@ -49,6 +53,11 @@ export class ConfigurationService {
   saveVideoProvider(provider: IVideoSource): Observable<IVideoSource> {
     return this.http.put<IVideoSource>(`${this.url}/video_sources/${provider.ID}`, provider);
   }
+
+  deleteVideoProvider(provider: IVideoSource): Observable<{}> {
+    return this.http.delete(`${this.url}/video_sources/${provider.ID}`);
+  }
+
   getVideoProviders(): Observable<IVideoSource[]> {
     return this.videoSourceService.getVideoSources();
   }
