@@ -36,4 +36,8 @@ export class ConfigurationVideoProviderComponent {
     });
     this.closeModal();
   }
-}
+
+  saveProvider(): void {
+    this.configService.saveVideoProvider(this.editingProvider as IVideoSource).subscribe();
+    this.closeModal();
+  }

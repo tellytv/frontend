@@ -26,18 +26,29 @@ export class ConfigurationService {
     private videoSourceService: VideoSourceService,
   ) { }
 
+  // Guide provider methods
+
   createGuideProvider(provider: ICreateGuideProvider): Observable<IGuideSource> {
     return this.http.post<IGuideSource>(`${this.url}/guide_sources`, provider);
+  }
+
+  saveGuideProvider(provider: IGuideSource): Observable<IGuideSource> {
+    return this.http.put<IGuideSource>(`${this.url}/guide_sources/${provider.ID}`, provider);
   }
 
   getGuideProviders(): Observable<IGuideSource[]> {
     return this.guideSourceService.getGuideSources();
   }
 
+  // Video provider methods
+
   createVideoProvider(provider: ICreateVideoProvider): Observable<IVideoSource> {
     return this.http.post<IVideoSource>(`${this.url}/video_sources`, provider);
   }
 
+  saveVideoProvider(provider: IVideoSource): Observable<IVideoSource> {
+    return this.http.put<IVideoSource>(`${this.url}/video_sources/${provider.ID}`, provider);
+  }
   getVideoProviders(): Observable<IVideoSource[]> {
     return this.videoSourceService.getVideoSources();
   }
