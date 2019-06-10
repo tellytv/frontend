@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { GuideSource, VideoSource } from '@app/lineup/models';
 import { ConfigurationService } from '@app/configuration/services/configuration.service';
+import { IGuideSource, IVideoSource } from '@app/lineup/models';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-configuration-overview',
   templateUrl: './configuration-overview.component.html',
-  styleUrls: ['./configuration-overview.component.scss']
+  styleUrls: ['./configuration-overview.component.scss'],
 })
 export class ConfigurationOverviewComponent implements OnInit {
-  $guideProviders: Observable<GuideSource[]>;
-  $videoProviders: Observable<VideoSource[]>;
+  $guideProviders: Observable<IGuideSource[]>;
+  $videoProviders: Observable<IVideoSource[]>;
 
   constructor(private configService: ConfigurationService) { }
 

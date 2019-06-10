@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Lineup, CreateLineup } from '@app/lineup/models';
-import { LineupService } from '@app/lineup/services/lineup.service';
 import { Router } from '@angular/router';
-
+import { ICreateLineup, ILineup } from '@app/lineup/models';
+import { LineupService } from '@app/lineup/services/lineup.service';
 
 @Component({
   selector: 'app-lineup-manager-overview',
   templateUrl: './lineup-manager-overview.component.html',
-  styleUrls: ['./lineup-manager-overview.component.scss']
+  styleUrls: ['./lineup-manager-overview.component.scss'],
 })
 export class LineupManagerOverviewComponent implements OnInit {
-  lineups$: Observable<Lineup[]>;
+  lineups$: Observable<ILineup[]>;
 
   addingLineup = false;
-  editingLineup: Lineup;
+  editingLineup: ILineup;
 
   constructor(private lineupService: LineupService, private router: Router) { }
 
@@ -27,12 +26,12 @@ export class LineupManagerOverviewComponent implements OnInit {
     this.addingLineup = true;
   }
 
-  editLineup(lineup: Lineup): void {
+  editLineup(lineup: ILineup): void {
     this.editingLineup = lineup;
   }
 
-  createLineup(lineup: CreateLineup): void {
-    this.lineupService.createLineup(lineup).subscribe((newLineup: Lineup) => {
+  createLineup(lineup: ICreateLineup): void {
+    this.lineupService.createLineup(lineup).subscribe((newLineup: ILineup) => {
       this.router.navigate(['/lineup/manage/', newLineup.ID]);
     });
   }

@@ -1,4 +1,4 @@
-export interface GuideProviderCoverageArea {
+export interface IGuideProviderCoverageArea {
   RegionName: string;
   FullName: string;
   PostalCode: string;
@@ -7,7 +7,7 @@ export interface GuideProviderCoverageArea {
   OnePostalCode: boolean;
 }
 
-export interface GuideProviderAvailableLineup {
+export interface IGuideProviderAvailableLineup {
   Location: string;
   Transport: string;
   Name: string;

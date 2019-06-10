@@ -1,6 +1,6 @@
-import { LineupChannel } from '@app/lineup/models/lineup-channel.model';
+import { ILineupChannel } from '@app/lineup/models/lineup-channel.model';
 
-export interface Lineup {
+export interface ILineup {
   ID: number;
   Name: string;
   SSDP: boolean;
@@ -18,5 +18,5 @@ export interface Lineup {
   DeviceUUID: string;
   CreatedAt: Date;
 
-  Channels: LineupChannel[];
+  Channels: ILineupChannel[];
 }

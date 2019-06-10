@@ -1,4 +1,4 @@
-export interface CreateLineup {
+export interface ICreateLineup {
   Name: string;
   ListenAddress: string;
   DiscoveryAddress: string;

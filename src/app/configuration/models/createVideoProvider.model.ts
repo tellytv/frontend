@@ -1,4 +1,4 @@
-export interface CreateVideoProvider {
+export interface ICreateVideoProvider {
   Name: string;
   Provider: VideoProvider;
 
@@ -17,5 +17,5 @@ export interface CreateVideoProvider {
 
 export enum VideoProvider {
   Xtream = 'Xtream',
-  M3U = 'M3U'
+  M3U = 'M3U',
 }

@@ -1,34 +1,34 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
+import { ActivatedRoute, Params } from '@angular/router';
+import { IGuideSourceChannel, ILineupChannel, IVideoSourceTrack } from '@app/lineup/models';
+import { ILineup } from '@app/lineup/models/lineup.model';
 import { GuideSourceService } from '@app/lineup/services/guide-source.service';
-import { VideoSourceService } from '@app/lineup/services/video-source.service';
 import { LineupService } from '@app/lineup/services/lineup.service';
-import { Lineup } from '@app/lineup/models/lineup.model';
-import { LineupChannel, GuideSourceChannel, VideoSourceTrack } from '@app/lineup/models';
-import { Observable } from 'rxjs/internal/Observable';
+import { VideoSourceService } from '@app/lineup/services/video-source.service';
 import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
-import { map, switchMap, share } from 'rxjs/operators';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
+import { map, share, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-lineup-manager',
   templateUrl: './lineup-manager.component.html',
-  styleUrls: ['./lineup-manager.component.scss']
+  styleUrls: ['./lineup-manager.component.scss'],
 })
 export class LineupManagerComponent implements OnInit, OnDestroy {
   DRAGULA_NAME = 'LINES';
 
   lineupId$: Observable<number>;
-  lineup$: Observable<Lineup>;
-  guideChannels$: Observable<GuideSourceChannel[]>;
-  videoTracks$: Observable<VideoSourceTrack[]>;
-  newLineupChannel: Observable<LineupChannel> = new Observable<LineupChannel>();
+  lineup$: Observable<ILineup>;
+  guideChannels$: Observable<IGuideSourceChannel[]>;
+  videoTracks$: Observable<IVideoSourceTrack[]>;
+  newLineupChannel: Observable<ILineupChannel> = new Observable<ILineupChannel>();
 
-  lineup: Lineup;
+  lineup: ILineup;
 
   addingChannel = false;
-  editingChannel: LineupChannel;
+  editingChannel: ILineupChannel;
 
   subs = new Subscription();
 
@@ -37,7 +37,7 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
     private guideSourceService: GuideSourceService,
     private videoSourceService: VideoSourceService,
     private dragulaService: DragulaService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -47,13 +47,13 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
       switchMap((lineupId: number) => {
         return this.lineupService.getLineup(lineupId);
       }),
-      share()
+      share(),
     );
 
     this.guideChannels$ = this.guideSourceService.getAllChannels();
     this.videoTracks$ = this.videoSourceService.getAllTracks();
 
-    this.lineup$.subscribe((lineup: Lineup) => {
+    this.lineup$.subscribe((lineup: ILineup) => {
       this.lineup = lineup;
     });
 
@@ -68,7 +68,7 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
 
   saveChannels(): void {
     // TODO: Add some fancy loaders to the page
-    this.lineupService.updateLineupChannels(this.lineup.ID, this.lineup.Channels).subscribe((lineup: Lineup) => this.lineup = lineup);
+    this.lineupService.updateLineupChannels(this.lineup.ID, this.lineup.Channels).subscribe((lineup: ILineup) => this.lineup = lineup);
   }
 
   closeModal(): void {
@@ -78,13 +78,13 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
 
   addChannel(): void {
     const channelNumber = this.lineup.Channels.length + 1;
-    const newChannel: LineupChannel = {
+    const newChannel: ILineupChannel = {
       Title: '',
       ChannelNumber: `${channelNumber}`,
       LockChannelNumber: false,
       HD: false,
       Favorite: false,
-      CreatedAt: new Date()
+      CreatedAt: new Date(),
     };
     this.addingChannel = true;
     this.editingChannel = newChannel;
@@ -97,18 +97,18 @@ export class LineupManagerComponent implements OnInit, OnDestroy {
     this.closeModal();
   }
 
-  updateChannelNumbers(channels: LineupChannel[]): void {
+  updateChannelNumbers(channels: ILineupChannel[]): void {
     let channelNumber = 1;
-    for (let i = 0; i < channels.length; i++) {
-      if (channels[i].LockChannelNumber) {
+    for (const channel of channels) {
+      if (channel.LockChannelNumber) {
         continue;
       }
-      channels[i].ChannelNumber = `${channelNumber}`;
+      channel.ChannelNumber = `${channelNumber}`;
       channelNumber++;
     }
   }
 
-  removeChannel(channel: LineupChannel): void {
+  removeChannel(channel: ILineupChannel): void {
     const removeIndex = this.lineup.Channels.indexOf(channel);
     this.lineup.Channels.splice(removeIndex, 1);
   }

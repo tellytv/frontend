@@ -1,6 +1,6 @@
-import { GuideSourceChannel } from '@app/lineup/models/guide-source-channel.model';
+import { IGuideSourceChannel } from '@app/lineup/models/guide-source-channel.model';
 
-export interface GuideSource {
+export interface IGuideSource {
   ID: number;
   Name: string;
   Provider: string;
@@ -8,6 +8,6 @@ export interface GuideSource {
   Password: string;
   URL: string;
   ImportedAt: Date;
-  Channels: GuideSourceChannel[];
+  Channels: IGuideSourceChannel[];
   ProviderData: any;
 }

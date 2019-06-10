@@ -1,25 +1,25 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { GuideSourceChannel, LineupChannel, VideoSourceTrack, VideoSource } from '@app/lineup/models/';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IGuideSourceChannel, ILineupChannel, IVideoSource, IVideoSourceTrack } from '@app/lineup/models/';
 
 @Component({
   selector: 'app-channel-edit-modal',
   templateUrl: './channel-edit-modal.component.html',
-  styleUrls: ['./channel-edit-modal.component.scss']
+  styleUrls: ['./channel-edit-modal.component.scss'],
 })
 export class ChannelEditModalComponent {
   @Input() newChannel: boolean;
-  @Input() channel: LineupChannel;
-  @Input() videoTracks: VideoSourceTrack[];
-  @Input() guideChannels: GuideSourceChannel[];
+  @Input() channel: ILineupChannel;
+  @Input() videoTracks: IVideoSourceTrack[];
+  @Input() guideChannels: IGuideSourceChannel[];
 
-  @Output() save = new EventEmitter<LineupChannel>();
-  @Output() close = new EventEmitter<LineupChannel>();
+  @Output() save = new EventEmitter<ILineupChannel>();
+  @Output() close = new EventEmitter<ILineupChannel>();
 
-  videoTrackGroupBy(item: VideoSourceTrack): string {
+  videoTrackGroupBy(item: IVideoSourceTrack): string {
     return `${item.VideoSourceName} -> ${item.Category}`;
   }
 
-  guideChannelGroupBy(item: GuideSourceChannel): string {
+  guideChannelGroupBy(item: IGuideSourceChannel): string {
     return `${item.GuideSourceName} -> ${item.Data.Lineup}`;
   }
 
@@ -31,7 +31,7 @@ export class ChannelEditModalComponent {
     return (item.GuideSourceName + item.Data.Name + ' ' + item.XMLTVID).toLowerCase().includes(search.toLowerCase());
   }
 
-  handleSelectVideoTrack(event: VideoSourceTrack): void {
+  handleSelectVideoTrack(event: IVideoSourceTrack): void {
     if (!this.channel.Title || this.channel.Title !== '') {
       this.channel.Title = event.Name;
     }

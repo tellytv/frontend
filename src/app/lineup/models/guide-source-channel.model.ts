@@ -1,10 +1,10 @@
-import { XMLTVChannel } from '@app/lineup/models/xmltv.model';
+import { IXMLTVChannel } from '@app/lineup/models/xmltv.model';
 
-export interface GuideSourceChannel {
+export interface IGuideSourceChannel {
   ID: number;
   GuideID: number;
   XMLTVID: string;
-  Data: XMLTVChannel;
+  Data: IXMLTVChannel;
   ImportedAt: Date;
   GuideSourceName: string;
   IconSource?: string;

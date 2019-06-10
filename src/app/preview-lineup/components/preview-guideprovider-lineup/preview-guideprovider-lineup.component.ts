@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { map, switchMap, share, combineLatest, merge } from 'rxjs/operators';
 import { ActivatedRoute, Params } from '@angular/router';
+import { IGuideSourceChannel } from '@app/lineup/models/guide-source-channel.model';
 import { PreviewLineupService } from '@app/preview-lineup/services/preview-lineup.service';
-import { GuideSourceChannel } from '@app/lineup/models/guide-source-channel.model';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Observable } from 'rxjs/internal/Observable';
+import { combineLatest, map, merge, share, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-preview-guideprovider-lineup',
   templateUrl: './preview-guideprovider-lineup.component.html',
-  styleUrls: ['./preview-guideprovider-lineup.component.scss']
+  styleUrls: ['./preview-guideprovider-lineup.component.scss'],
 })
-export class PreviewGuideproviderLineupComponent implements OnInit {
+export class PreviewGuideProviderLineupComponent implements OnInit {
 
-  channels$: Observable<GuideSourceChannel[]>;
+  channels$: Observable<IGuideSourceChannel[]>;
 
   constructor(
     private previewLineupService: PreviewLineupService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {

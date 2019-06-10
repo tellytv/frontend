@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { ConfigurationOverviewComponent, ConfigurationVideoproviderComponent, ConfigurationGuideproviderComponent } from './components';
-import { EditVideoproviderModalComponent } from './components/edit-videoprovider-modal/edit-videoprovider-modal.component';
-import { EditGuideproviderModalComponent } from './components/edit-guideprovider-modal/edit-guideprovider-modal.component';
+import { ConfigurationGuideProviderComponent, ConfigurationOverviewComponent, ConfigurationVideoProviderComponent } from './components';
 import {
-  EditGuideProviderLineupsModalComponent
+  EditGuideProviderLineupsModalComponent,
 } from './components/edit-guideprovider-lineups-modal/edit-guideprovider-lineups-modal.component';
+import { EditGuideProviderModalComponent } from './components/edit-guideprovider-modal/edit-guideprovider-modal.component';
+import { EditVideoProviderModalComponent } from './components/edit-videoprovider-modal/edit-videoprovider-modal.component';
 
 @NgModule({
   imports: [
@@ -18,11 +18,11 @@ import {
   ],
   declarations: [
     ConfigurationOverviewComponent,
-    ConfigurationVideoproviderComponent,
-    ConfigurationGuideproviderComponent,
-    EditVideoproviderModalComponent,
-    EditGuideproviderModalComponent,
+    ConfigurationVideoProviderComponent,
+    ConfigurationGuideProviderComponent,
+    EditVideoProviderModalComponent,
+    EditGuideProviderModalComponent,
     EditGuideProviderLineupsModalComponent,
-  ]
+  ],
 })
 export class ConfigurationModule { }
