@@ -40,7 +40,20 @@ export class ConfigurationGuideProviderComponent {
   createProvider(): void {
     this.configService.createGuideProvider(this.editingProvider as ICreateGuideProvider).subscribe((provider: IGuideSource) => {
       this.providers.push(provider);
+      this.closeModal();
     });
-    this.closeModal();
+  }
+
+  saveProvider(): void {
+    this.configService.saveGuideProvider(this.editingProvider as IGuideSource).subscribe(() => {
+      this.closeModal();
+    });
+  }
+
+  removeProvider(provider: IGuideSource): void {
+    this.configService.deleteGuideProvider(provider).subscribe(() => {
+      const index = this.providers.findIndex((d: IGuideSource) => d.ID === provider.ID);
+      this.providers.splice(index, 1);
+    });
   }
 }

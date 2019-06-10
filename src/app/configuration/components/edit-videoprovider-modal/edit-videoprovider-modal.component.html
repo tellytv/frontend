@@ -31,7 +31,7 @@
           </div>
           <div *ngIf="provider.Provider == 'Xtream'" class="form-group">
             <label for="baseurl">Provider URL</label>
-            <input type="url" class="form-control" id="baseurl" name="baseurl" placeholder="http://irislinks.net:83" [(ngModel)]="provider.BaseUrl">
+            <input type="url" class="form-control" id="baseurl" name="baseurl" placeholder="http://irislinks.net:83" [(ngModel)]="provider.BaseURL">
           </div>
           <div *ngIf="provider.Provider == 'M3U'" class="form-group">
             <label for="M3UURL">Path to or URL of M3U file</label>
@@ -61,8 +61,8 @@
         <button type="button" class="btn btn-primary" (click)="this.create.emit()">Add Provider</button>
       </div>
       <div *ngIf="!newProvider" class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="this.close.emit()">Close</button>
-        <button type="button" class="btn btn-primary" (click)="this.save.emit()">Add Provider</button>
+        <button type="button" class="btn btn-secondary" (click)="this.close.emit()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="this.save.emit()">Save Provider</button>
       </div>
     </div>
   </div>
